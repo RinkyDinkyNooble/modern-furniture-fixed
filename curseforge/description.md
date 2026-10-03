@@ -1,6 +1,6 @@
 # Modern Furniture Fixed [MFF] (Unofficial Patch)
 
-**A replacement for MDM: remove MDM, then add this mod.** Worlds made with MDM keep working.
+**A replacement for [MDM](https://www.curseforge.com/minecraft/mc-mods/m-d-m): remove MDM, then add this mod.** Worlds made with MDM keep working.
 
 A fixed version of MDM (Modern Decorations Mod) 26.9 by opaleq, for Minecraft 1.20.1 and Forge 47.
 
