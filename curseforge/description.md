@@ -1,6 +1,8 @@
 # Modern Furniture Fixed [MFF] (Unofficial Patch)
 
-A fixed version of MDM (Modern Decorations Mod) 26.9 by opaleq, for Minecraft 1.20.1 and Forge 47. **It replaces MDM:** remove MDM and add this mod. It keeps MDM's mod id and every block id, so worlds and buildings made with MDM keep working.
+**A replacement for MDM: remove MDM, then add this mod.** Worlds made with MDM keep working.
+
+A fixed version of MDM (Modern Decorations Mod) 26.9 by opaleq, for Minecraft 1.20.1 and Forge 47.
 
 - **Hitboxes that follow the furniture**, for every block. No more full-cube couches or hitboxes beside the model.
 - **Furniture larger than one block is split into one block per space it fills**, so it collides, lights and hides correctly instead of poking through walls. Placing it places every part, and breaking any part breaks the whole piece and drops one item.
@@ -9,9 +11,19 @@ A fixed version of MDM (Modern Decorations Mod) 26.9 by opaleq, for Minecraft 1.
 - **Mines faster with an axe or a pickaxe.**
 - The boots, shoe racks and electric guitars are removed.
 
-Needed on both the client and the server. Furniture placed before installing MFF keeps its old look until it is broken and placed again.
+The full list, block by block, is in [FIXES.md](https://github.com/RinkyDinkyNooble/modern-furniture-fixed/blob/main/FIXES.md).
 
-The full list, block by block, is in FIXES.md on GitHub.
+![All the furniture](https://raw.githubusercontent.com/RinkyDinkyNooble/modern-furniture-fixed/main/curseforge/images/all_furniture.png)
+
+**Hitboxes in MDM:**
+
+![Hitboxes in MDM](https://raw.githubusercontent.com/RinkyDinkyNooble/modern-furniture-fixed/main/curseforge/images/Before-Hitbox.png)
+
+**Hitboxes in Modern Furniture Fixed:**
+
+![Hitboxes in Modern Furniture Fixed](https://raw.githubusercontent.com/RinkyDinkyNooble/modern-furniture-fixed/main/curseforge/images/After-Hitbox.png)
+
+Needed on both the client and the server. Furniture placed before installing MFF keeps its old look until it is broken and placed again.
 
 ## Settings
 
