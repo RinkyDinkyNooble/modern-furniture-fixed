@@ -1,14 +1,17 @@
 package com.rinkynooble.modernfurniturefixed;
 
 import com.cookiecraftmods.mdm.block.FurnitureBlock;
+import java.util.List;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 /**
  * Furniture storage. Each piece has one inventory, kept by one block: an unsplit piece itself, or the first part
@@ -45,15 +48,26 @@ public final class FurnitureStorage {
         return SplitFurniture.find(block, level, pos, state, storage.parts().get(0));
     }
 
-    public static InteractionResult use(FurnitureBlock block, BlockState state, Level level, BlockPos pos, Player player) {
+    public static InteractionResult use(FurnitureBlock block, BlockState state, Level level, BlockPos pos, Player player, Direction side) {
         BlockPos holder = holderPos(block, level, pos, state);
-        if (holder == null) {
+        if (holder == null || !opensFrom(block, state, side)) {
             return InteractionResult.PASS;
         }
         if (!level.isClientSide && level.getBlockEntity(holder) instanceof FurnitureStorageBlockEntity storage) {
             player.openMenu(storage);
         }
         return InteractionResult.sidedSuccess(level.isClientSide);
+    }
+
+    /** True if the storage opens from the clicked side: any side, or only the sides the data lists. */
+    private static boolean opensFrom(FurnitureBlock block, BlockState state, Direction side) {
+        List<String> faces = block.furniture().storage().faces();
+        if (faces.isEmpty() || !state.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
+            return true;
+        }
+        Direction facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+        return (faces.contains("left") && side == facing.getClockWise())
+                || (faces.contains("right") && side == facing.getCounterClockWise());
     }
 
     /** Drops the contents when the block that keeps them is replaced by another block. */

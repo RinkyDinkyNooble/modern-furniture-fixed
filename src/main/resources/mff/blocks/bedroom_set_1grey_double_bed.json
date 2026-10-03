@@ -1391,6 +1391,9 @@
       "right"
     ],
     "rows": 3,
-    "sound": "wood"
+    "faces": [
+      "left",
+      "right"
+    ]
   }
 }

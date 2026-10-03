@@ -10,7 +10,8 @@ Writes, under src/main/resources:
   assets/mdm/models/block/split/<id>/<part>.json
   mff/blocks/<id>.json                           per variant: hitbox boxes in pixels, and for parts the
                                                  offset from the main part; the parts; storage settings
-  mff/index.json                                 block class name -> block id
+  assets/mdm/lang/en_us.json                     storage screen titles (container.mdm.<id>)
+  mff/index.json                                block class name -> block id
   data/minecraft/tags/blocks/mineable/axe.json and pickaxe.json
 
 Part names describe where a part sits as seen by someone looking at the front of the furniture:
@@ -165,8 +166,19 @@ def is_rotated(el):
     return bool(rot) and rot.get("angle", 0) != 0
 
 
+def extent(el):
+    """Where an element really reaches on each axis, after its rotation."""
+    f, t = el["from"], el["to"]
+    if not is_rotated(el):
+        return list(f), list(t)
+    forward = turner(el)[0]
+    corners = [forward([(t if (i >> k) & 1 else f)[k] for k in range(3)]) for i in range(8)]
+    return [min(c[a] for c in corners) for a in range(3)], [max(c[a] for c in corners) for a in range(3)]
+
+
 def center_cell(el):
-    return tuple(math.floor((el["from"][a] + el["to"][a]) / 2 / 16) for a in range(3))
+    f, t = extent(el)
+    return tuple(math.floor((f[a] + t[a]) / 2 / 16) for a in range(3))
 
 
 AXES = {"x": 0, "y": 1, "z": 2}
@@ -175,7 +187,7 @@ AXES = {"x": 0, "y": 1, "z": 2}
 def cells_of(el):
     """The block spaces an element reaches. A rotated element is cut only along its rotation axis; across the
     other two it stays in the space its centre is in."""
-    f, t = el["from"], el["to"]
+    f, t = extent(el)
     center = center_cell(el)
     axis = AXES[el["rotation"]["axis"]] if is_rotated(el) else None
     ranges = []
@@ -259,26 +271,112 @@ def clip_element(el, cell, part_cells):
 
 
 # ---------------------------------------------------------------- hitboxes --
-def hitbox(elements, lo=0, hi=16):
-    """The hitbox: the elements snapped to whole pixels, leaving out small details (handles, feet, thin trim)
-    and boxes inside other boxes. If that leaves nothing, every element counts."""
-    def boxes(skip_details):
-        out = []
-        for el in elements:
-            f, t = el["from"], el["to"]
-            size = sorted(t[a] - f[a] for a in range(3))
-            if skip_details:
-                if size[0] * size[1] * size[2] < 8 and size[0] >= 1:
-                    continue
-                if size[0] < 1 and size[1] * size[2] < 64:
-                    continue
-            b0 = [max(lo, math.floor(f[a])) for a in range(3)]
-            b1 = [min(hi, max(math.ceil(t[a]), b0[a] + 1)) for a in range(3)]
-            if all(b1[a] > b0[a] for a in range(3)):
-                out.append(b0 + b1)
-        return out
+# The two axes a rotation turns, in right-handed order around the rotation axis.
+TURNED = {0: (1, 2), 1: (2, 0), 2: (0, 1)}
+RESCALE = {22.5: 1 / math.cos(math.radians(22.5)), 45.0: 1 / math.cos(math.radians(45))}
 
-    found = boxes(True) or boxes(False) or [[0, 0, 0, 16, 16, 16]]
+
+def merge(voxels):
+    """Greedy boxes covering a set of whole-pixel voxels."""
+    left = set(voxels)
+    boxes = []
+    for v in sorted(voxels, key=lambda v: (v[1], v[2], v[0])):
+        if v not in left:
+            continue
+        x0, y0, z0 = v
+        x1 = x0 + 1
+        while (x1, y0, z0) in left:
+            x1 += 1
+        z1 = z0 + 1
+        while all((x, y0, z1) in left for x in range(x0, x1)):
+            z1 += 1
+        y1 = y0 + 1
+        while all((x, y1, z) in left for x in range(x0, x1) for z in range(z0, z1)):
+            y1 += 1
+        for x in range(x0, x1):
+            for y in range(y0, y1):
+                for z in range(z0, z1):
+                    left.discard((x, y, z))
+        boxes.append([x0, y0, z0, x1, y1, z1])
+    return boxes
+
+
+def turner(el):
+    """Functions that turn a point the way Minecraft turns a rotated element, and back."""
+    rot = el["rotation"]
+    axis = AXES[rot["axis"]]
+    a0, a1 = TURNED[axis]
+    angle = math.radians(rot["angle"])
+    cos, sin = math.cos(angle), math.sin(angle)
+    origin = rot.get("origin", [8, 8, 8])
+    scale = RESCALE.get(abs(float(rot["angle"])), 1.0) if rot.get("rescale") else 1.0
+
+    def forward(p):
+        q = [p[i] - origin[i] for i in range(3)]
+        q[a0], q[a1] = (q[a0] * cos - q[a1] * sin) * scale, (q[a0] * sin + q[a1] * cos) * scale
+        return [q[i] + origin[i] for i in range(3)]
+
+    def backward(p):
+        q = [p[i] - origin[i] for i in range(3)]
+        u, v = q[a0] / scale, q[a1] / scale
+        q[a0], q[a1] = u * cos + v * sin, -u * sin + v * cos
+        return [q[i] + origin[i] for i in range(3)]
+
+    return forward, backward
+
+
+def rotated_boxes(el, lo, hi):
+    """A staircase of whole-pixel boxes following a rotated element, turned the way Minecraft turns it."""
+    forward, backward = turner(el)
+    # Thin elements are thickened to a pixel, so they leave an unbroken staircase.
+    f, t = list(el["from"]), list(el["to"])
+    for a in range(3):
+        if t[a] - f[a] < 1:
+            mid = (f[a] + t[a]) / 2
+            f[a], t[a] = mid - 0.5, mid + 0.5
+    corners =[forward([(t if (i >> k) & 1 else f)[k] for k in range(3)]) for i in range(8)]
+    rng = [range(max(lo, math.floor(min(c[a] for c in corners))), min(hi, math.ceil(max(c[a] for c in corners)))) for a in range(3)]
+    voxels = set()
+    for x in rng[0]:
+        for y in rng[1]:
+            for z in rng[2]:
+                p = backward([x + 0.5, y + 0.5, z + 0.5])
+                if all(f[a] - 1e-6 <= p[a] <= t[a] + 1e-6 for a in range(3)):
+                    voxels.add((x, y, z))
+    return merge(voxels)
+
+
+def element_boxes(el, lo, hi):
+    if is_rotated(el):
+        return rotated_boxes(el, lo, hi)
+    f, t = el["from"], el["to"]
+    b0 = [max(lo, math.floor(f[a])) for a in range(3)]
+    b1 = [min(hi, max(math.ceil(t[a]), b0[a] + 1)) for a in range(3)]
+    return [b0 + b1] if all(b1[a] > b0[a] for a in range(3)) else []
+
+
+def is_detail(el):
+    f, t = el["from"], el["to"]
+    size = sorted(t[a] - f[a] for a in range(3))
+    if size[0] * size[1] * size[2] < 8 and size[0] >= 1:
+        return True
+    return size[0] < 1 and size[1] * size[2] < 64
+
+
+def bbox_volume(boxes):
+    if not boxes:
+        return 0
+    return math.prod(max(b[a + 3] for b in boxes) - min(b[a] for b in boxes) for a in range(3))
+
+
+def hitbox(elements, lo=0, hi=16):
+    """The hitbox: the elements as whole-pixel boxes (rotated ones as a staircase), leaving out small details
+    (handles, feet, thin trim) and boxes inside other boxes. If leaving the details out would lose most of the
+    object (a lantern made of thin glass, a lamp shade), every element counts."""
+    every = [b for el in elements for b in element_boxes(el, lo, hi)]
+    main = [b for el in elements if not is_detail(el) for b in element_boxes(el, lo, hi)]
+    found = main if main and bbox_volume(main) >= 0.5 * bbox_volume(every) else every
+    found = found or [[0, 0, 0, 16, 16, 16]]
     found = sorted({tuple(b) for b in found}, key=lambda b: -(b[3] - b[0]) * (b[4] - b[1]) * (b[5] - b[2]))
     kept = []
     for b in found:
@@ -330,8 +428,9 @@ def reach(elements, cell):
     lo = [c * 16 for c in cell]
     for el in elements:
         depth = math.inf
+        ext = extent(el)
         for a in range(3):
-            f, t = el["from"][a], el["to"][a]
+            f, t = ext[0][a], ext[1][a]
             if cell[a] > 0:
                 depth = min(depth, t - lo[a])
             elif cell[a] < 0:
@@ -343,7 +442,7 @@ def reach(elements, cell):
 
 
 def oversized(elements):
-    return any(min(e["from"]) < 0 or max(e["to"]) > 16 for e in elements)
+    return any(min(extent(e)[0]) < 0 or max(extent(e)[1]) > 16 for e in elements)
 
 
 def build(bid, spec, report):
@@ -383,7 +482,8 @@ def build(bid, spec, report):
         for pname, (cell, clipped) in parts.items():
             for el in clipped:
                 if is_rotated(el):
-                    over = max(max(-min(el["from"][a], el["to"][a]), max(el["from"][a], el["to"][a]) - 16) for a in range(3))
+                    f, t = extent(el)
+                    over = max(max(-f[a], t[a] - 16) for a in range(3))
                     if over > 0:
                         report["overhang"].append((bid, pname, round(over, 2)))
         for pname, (cell, clipped) in parts.items():
@@ -420,10 +520,34 @@ def build(bid, spec, report):
         else:
             fill = part_fill[""]
         storage["rows"] = spec["rows"].get(bid, rows_for(fill))
-        storage["sound"] = "metal" if any(s in bid for s in spec["metal_sound"]) else "wood"
+        if bid in spec["open_faces"]:
+            storage["faces"] = spec["open_faces"][bid]
         data["storage"] = storage
         report["storage"].append((bid, storage, round(fill, 2)))
     write(os.path.join(RES, "mff", "blocks", bid + ".json"), data)
+
+
+TITLE_PREFIXES = ("Bedroom Set 1 ", "Kitchen Set 3 ", "Office Set 1 ", "Set 1 ", "Set 2 ", "Set 3 ")
+TITLE_LENGTH = 28
+
+
+def write_titles(spec):
+    """Storage screen titles (container.mdm.<id>): the block's name without its set's prefix, cut at a word
+    to fit a chest screen."""
+    lang_path = os.path.join(ASSETS, "mdm", "lang", "en_us.json")
+    lang = load(lang_path)
+    for bid in spec["storage"]:
+        name = lang.get(f"block.mdm.{bid}", bid.replace("_", " ").title())
+        for prefix in TITLE_PREFIXES:
+            if name.startswith(prefix):
+                name = name[len(prefix):]
+                break
+        while len(name) > TITLE_LENGTH and " " in name:
+            name = name.rsplit(" ", 1)[0]
+        lang[f"container.mdm.{bid}"] = name[:TITLE_LENGTH]
+    with open(lang_path, "w", encoding="utf-8", newline="\n") as fh:
+        json.dump(lang, fh, indent=2, ensure_ascii=False)
+        fh.write("\n")
 
 
 def main():
@@ -440,7 +564,8 @@ def main():
     for bid in ids:
         build(bid, spec, report)
     write(os.path.join(RES, "mff", "index.json"), {cls: bid for bid, cls in registry})
-    tag = {"replace": False, "values": [f"mdm:{b}" for b in sorted(ids)]}
+    write_titles(spec)
+    tag ={"replace": False, "values": [f"mdm:{b}" for b in sorted(ids)]}
     for tool in ("axe", "pickaxe"):
         write(os.path.join(RES, "data", "minecraft", "tags", "blocks", "mineable", tool + ".json"), tag)
 

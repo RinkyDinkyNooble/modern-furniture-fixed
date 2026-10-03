@@ -1,5 +1,5 @@
 {
-  "block.furniture.wood.open": {
+  "block.furniture.open": {
     "subtitle": "subtitles.mdm.block.furniture.open",
     "sounds": [
       {
@@ -8,29 +8,11 @@
       }
     ]
   },
-  "block.furniture.wood.close": {
+  "block.furniture.close": {
     "subtitle": "subtitles.mdm.block.furniture.close",
     "sounds": [
       {
         "name": "minecraft:block.barrel.close",
-        "type": "event"
-      }
-    ]
-  },
-  "block.furniture.metal.open": {
-    "subtitle": "subtitles.mdm.block.furniture.open",
-    "sounds": [
-      {
-        "name": "minecraft:block.iron_door.open",
-        "type": "event"
-      }
-    ]
-  },
-  "block.furniture.metal.close": {
-    "subtitle": "subtitles.mdm.block.furniture.close",
-    "sounds": [
-      {
-        "name": "minecraft:block.iron_door.close",
         "type": "event"
       }
     ]

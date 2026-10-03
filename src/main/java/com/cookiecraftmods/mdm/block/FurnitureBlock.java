@@ -126,7 +126,7 @@ public class FurnitureBlock extends Block implements EntityBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        return FurnitureStorage.use(this, state, level, pos, player);
+        return FurnitureStorage.use(this, state, level, pos, player, hit.getDirection());
     }
 
     @Override

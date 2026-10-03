@@ -1,0 +1,35 @@
+name: Bug report
+description: A piece of furniture looks, collides or behaves wrong, or the game crashed.
+labels: [bug]
+body:
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Modern Furniture Fixed, Minecraft and Forge versions.
+      placeholder: Modern Furniture Fixed 1.0.0, Minecraft 1.20.1, Forge 47.4.10
+    validations:
+      required: true
+  - type: input
+    id: blocks
+    attributes:
+      label: Blocks
+      description: The block ids involved. Press F3 and look at the block to see its id and its `part`.
+      placeholder: mdm:black_office_desk, part=left
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you expected, and what you got instead. Screenshots help.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: If the game crashed, attach the crash report or `logs/latest.log`.
+  - type: textarea
+    id: mods
+    attributes:
+      label: Other mods
+      description: The mods that matter here, or the whole mod list if it's a big pack.

@@ -242,7 +242,6 @@
     }
   },
   "storage": {
-    "rows": 3,
-    "sound": "metal"
+    "rows": 3
   }
 }

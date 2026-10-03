@@ -1,0 +1,1 @@
+An unofficial fixed version of MDM (Modern Decorations Mod): hitboxes that follow the furniture, large furniture split into one block per space, and storage that opens as a chest.

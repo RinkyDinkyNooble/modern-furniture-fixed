@@ -274,7 +274,6 @@
     }
   },
   "storage": {
-    "rows": 2,
-    "sound": "wood"
+    "rows": 2
   }
 }

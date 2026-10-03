@@ -114,7 +114,6 @@
     }
   },
   "storage": {
-    "rows": 1,
-    "sound": "wood"
+    "rows": 1
   }
 }

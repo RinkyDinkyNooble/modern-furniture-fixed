@@ -12,27 +12,18 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-/** Storage open and close sounds. They play Minecraft's own sounds (see {@code assets/mdm/sounds.json}). */
+/** Storage open and close sounds. They play Minecraft's barrel sounds (see {@code assets/mdm/sounds.json}). */
 public final class MffSounds {
     public static final DeferredRegister<SoundEvent> REGISTRY = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MdmMod.MODID);
     private static final String PREFIX = "block.furniture.";
-    public static final RegistryObject<SoundEvent> WOOD_OPEN = register("wood.open");
-    public static final RegistryObject<SoundEvent> WOOD_CLOSE = register("wood.close");
-    public static final RegistryObject<SoundEvent> METAL_OPEN = register("metal.open");
-    public static final RegistryObject<SoundEvent> METAL_CLOSE = register("metal.close");
+    public static final RegistryObject<SoundEvent> OPEN = register("open");
+    public static final RegistryObject<SoundEvent> CLOSE = register("close");
 
     private MffSounds() {
     }
 
     private static RegistryObject<SoundEvent> register(String name) {
         return REGISTRY.register(PREFIX + name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MdmMod.MODID, PREFIX + name)));
-    }
-
-    public static SoundEvent storage(String sound, boolean open) {
-        if ("metal".equals(sound)) {
-            return (open ? METAL_OPEN : METAL_CLOSE).get();
-        }
-        return (open ? WOOD_OPEN : WOOD_CLOSE).get();
     }
 
     /** Mutes the storage sounds for players who turned them off in the client config. */

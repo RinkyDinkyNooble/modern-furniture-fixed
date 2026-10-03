@@ -34,7 +34,7 @@ import net.minecraftforge.items.wrapper.SidedInvWrapper;
 /**
  * The inventory of a piece of furniture. It opens as a vanilla chest of 1 to 6 rows (the server config sets the
  * rows per block), works with hoppers, loot tables and the item capability, and plays a sound when it opens and
- * closes. Items saved in slots past the configured size are dropped when the block loads.
+ * closes. Its title is the block's short storage name ({@code container.mdm.<id>}). Items saved in slots past the configured size are dropped when the block loads.
  */
 public class FurnitureStorageBlockEntity extends RandomizableContainerBlockEntity implements WorldlyContainer {
     private static final MenuType<?>[] MENUS = {
@@ -134,7 +134,9 @@ public class FurnitureStorageBlockEntity extends RandomizableContainerBlockEntit
 
     @Override
     protected Component getDefaultName() {
-        return Component.translatable(this.getBlockState().getBlock().getDescriptionId());
+        return this.getBlockState().getBlock() instanceof FurnitureBlock block
+                ? Component.translatable("container.mdm." + block.furniture().id())
+                : Component.translatable(this.getBlockState().getBlock().getDescriptionId());
     }
 
     @Override
@@ -165,11 +167,11 @@ public class FurnitureStorageBlockEntity extends RandomizableContainerBlockEntit
     }
 
     private void playSound(BlockState state, boolean open) {
-        if (this.level == null || !(state.getBlock() instanceof FurnitureBlock block) || block.furniture().storage() == null) {
+        if (this.level == null) {
             return;
         }
         this.level.playSound(null, this.worldPosition.getX() + 0.5, this.worldPosition.getY() + 0.5, this.worldPosition.getZ() + 0.5,
-                MffSounds.storage(block.furniture().storage().sound(), open), SoundSource.BLOCKS, 0.5F,
+                (open ? MffSounds.OPEN : MffSounds.CLOSE).get(), SoundSource.BLOCKS, 0.5F,
                 this.level.random.nextFloat() * 0.1F + 0.9F);
     }
 

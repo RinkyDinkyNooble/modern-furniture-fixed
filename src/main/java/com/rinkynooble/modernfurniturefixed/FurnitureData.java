@@ -47,8 +47,11 @@ public final class FurnitureData {
     private record Variant(Map<String, String> properties, VoxelShape shape, Vec3i offset) {
     }
 
-    /** The parts that open the storage; the first one holds the items. */
-    public record Storage(int rows, String sound, List<SplitPart> parts) {
+    /**
+     * The parts that open the storage (the first one holds the items), and the sides it opens from: "left"
+     * and "right" as seen from the front, or every side if none are listed.
+     */
+    public record Storage(int rows, List<SplitPart> parts, List<String> faces) {
     }
 
     private FurnitureData(String id, JsonObject json) {
@@ -96,7 +99,13 @@ public final class FurnitureData {
                     parts.add(SplitPart.byName(element.getAsString()));
                 }
             }
-            this.storage = new Storage(s.get("rows").getAsInt(), s.get("sound").getAsString(), Collections.unmodifiableList(parts));
+            List<String> faces = new ArrayList<>();
+            if (s.has("faces")) {
+                for (JsonElement element : s.getAsJsonArray("faces")) {
+                    faces.add(element.getAsString());
+                }
+            }
+            this.storage = new Storage(s.get("rows").getAsInt(), Collections.unmodifiableList(parts), Collections.unmodifiableList(faces));
         } else {
             this.storage = null;
         }

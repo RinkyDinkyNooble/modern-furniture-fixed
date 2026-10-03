@@ -167,15 +167,33 @@
     "shelf": 2,
     "steel_shelf": 3
   },
-  "metal_sound": [
-    "fridge",
-    "freezer",
-    "oven",
-    "microwave",
-    "dishwasher",
-    "steel"
-  ],
   "add_facing": [
     "bedroom_set_1wengenightstand_1"
-  ]
+  ],
+  "open_faces": {
+    "bedroom_set_1grey_double_bed": [
+      "left",
+      "right"
+    ],
+    "bedroom_set_1grey_single_bed": [
+      "left",
+      "right"
+    ],
+    "bedroom_set_1wenge_double_bed": [
+      "left",
+      "right"
+    ],
+    "bedroom_set_1wenge_single_bed": [
+      "left",
+      "right"
+    ],
+    "bedroom_set_1white_doublebed": [
+      "left",
+      "right"
+    ],
+    "bedroom_set_1white_singlebed": [
+      "left",
+      "right"
+    ]
+  }
 }
