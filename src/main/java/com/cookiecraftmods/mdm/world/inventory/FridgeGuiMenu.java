@@ -1,0 +1,440 @@
+package com.cookiecraftmods.mdm.world.inventory;
+
+import com.cookiecraftmods.mdm.init.MdmModMenus;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Supplier;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
+import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.SlotItemHandler;
+
+public class FridgeGuiMenu extends AbstractContainerMenu implements MdmModMenus.MenuAccessor {
+    public final Map<String, Object> menuState = new HashMap<String, Object>() {
+        public Object put(String key, Object value) {
+            return !this.containsKey(key) && this.size() >= 19 ? null : super.put(key, value);
+        }
+    };
+    public final Level world;
+    public final Player entity;
+    public int x;
+    public int y;
+    public int z;
+    private ContainerLevelAccess access = ContainerLevelAccess.NULL;
+    private IItemHandler internal;
+    private final Map<Integer, Slot> customSlots = new HashMap<>();
+    private boolean bound = false;
+    private Supplier<Boolean> boundItemMatcher = null;
+    private Entity boundEntity = null;
+    private BlockEntity boundBlockEntity = null;
+
+    public FridgeGuiMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
+        super(MdmModMenus.FRIDGE_GUI.get(), id);
+        this.entity = inv.player;
+        this.world = inv.player.level();
+        this.internal = new ItemStackHandler(18);
+        BlockPos pos = null;
+        if (extraData != null) {
+            pos = extraData.readBlockPos();
+            this.x = pos.getX();
+            this.y = pos.getY();
+            this.z = pos.getZ();
+            this.access = ContainerLevelAccess.create(this.world, pos);
+        }
+
+        if (pos != null) {
+            if (extraData.readableBytes() == 1) {
+                byte hand = extraData.readByte();
+                ItemStack itemstack = hand == 0 ? this.entity.getMainHandItem() : this.entity.getOffhandItem();
+                this.boundItemMatcher = () -> itemstack == (hand == 0 ? this.entity.getMainHandItem() : this.entity.getOffhandItem());
+                itemstack.getCapability(ForgeCapabilities.ITEM_HANDLER, null).ifPresent(capability -> {
+                    this.internal = capability;
+                    this.bound = true;
+                });
+            } else if (extraData.readableBytes() > 1) {
+                extraData.readByte();
+                this.boundEntity = this.world.getEntity(extraData.readVarInt());
+                if (this.boundEntity != null) {
+                    this.boundEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, null).ifPresent(capability -> {
+                        this.internal = capability;
+                        this.bound = true;
+                    });
+                }
+            } else {
+                this.boundBlockEntity = this.world.getBlockEntity(pos);
+                if (this.boundBlockEntity != null) {
+                    this.boundBlockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, null).ifPresent(capability -> {
+                        this.internal = capability;
+                        this.bound = true;
+                    });
+                }
+            }
+        }
+
+        this.customSlots.put(0, this.addSlot(new SlotItemHandler(this.internal, 0, 39, 29) {
+            private final int slot = 0;
+            private int x;
+            private int y;
+
+            {
+                this.x = FridgeGuiMenu.this.x;
+                this.y = FridgeGuiMenu.this.y;
+            }
+        }));
+        this.customSlots.put(1, this.addSlot(new SlotItemHandler(this.internal, 1, 57, 29) {
+            private final int slot = 1;
+            private int x;
+            private int y;
+
+            {
+                this.x = FridgeGuiMenu.this.x;
+                this.y = FridgeGuiMenu.this.y;
+            }
+        }));
+        this.customSlots.put(2, this.addSlot(new SlotItemHandler(this.internal, 2, 75, 29) {
+            private final int slot = 2;
+            private int x;
+            private int y;
+
+            {
+                this.x = FridgeGuiMenu.this.x;
+                this.y = FridgeGuiMenu.this.y;
+            }
+        }));
+        this.customSlots.put(3, this.addSlot(new SlotItemHandler(this.internal, 3, 93, 29) {
+            private final int slot = 3;
+            private int x;
+            private int y;
+
+            {
+                this.x = FridgeGuiMenu.this.x;
+                this.y = FridgeGuiMenu.this.y;
+            }
+        }));
+        this.customSlots.put(4, this.addSlot(new SlotItemHandler(this.internal, 4, 111, 29) {
+            private final int slot = 4;
+            private int x;
+            private int y;
+
+            {
+                this.x = FridgeGuiMenu.this.x;
+                this.y = FridgeGuiMenu.this.y;
+            }
+        }));
+        this.customSlots.put(5, this.addSlot(new SlotItemHandler(this.internal, 5, 129, 29) {
+            private final int slot = 5;
+            private int x;
+            private int y;
+
+            {
+                this.x = FridgeGuiMenu.this.x;
+                this.y = FridgeGuiMenu.this.y;
+            }
+        }));
+        this.customSlots.put(6, this.addSlot(new SlotItemHandler(this.internal, 6, 39, 47) {
+            private final int slot = 6;
+            private int x;
+            private int y;
+
+            {
+                this.x = FridgeGuiMenu.this.x;
+                this.y = FridgeGuiMenu.this.y;
+            }
+        }));
+        this.customSlots.put(7, this.addSlot(new SlotItemHandler(this.internal, 7, 57, 47) {
+            private final int slot = 7;
+            private int x;
+            private int y;
+
+            {
+                this.x = FridgeGuiMenu.this.x;
+                this.y = FridgeGuiMenu.this.y;
+            }
+        }));
+        this.customSlots.put(8, this.addSlot(new SlotItemHandler(this.internal, 8, 75, 47) {
+            private final int slot = 8;
+            private int x;
+            private int y;
+
+            {
+                this.x = FridgeGuiMenu.this.x;
+                this.y = FridgeGuiMenu.this.y;
+            }
+        }));
+        this.customSlots.put(9, this.addSlot(new SlotItemHandler(this.internal, 9, 93, 47) {
+            private final int slot = 9;
+            private int x;
+            private int y;
+
+            {
+                this.x = FridgeGuiMenu.this.x;
+                this.y = FridgeGuiMenu.this.y;
+            }
+        }));
+        this.customSlots.put(10, this.addSlot(new SlotItemHandler(this.internal, 10, 111, 47) {
+            private final int slot = 10;
+            private int x;
+            private int y;
+
+            {
+                this.x = FridgeGuiMenu.this.x;
+                this.y = FridgeGuiMenu.this.y;
+            }
+        }));
+        this.customSlots.put(11, this.addSlot(new SlotItemHandler(this.internal, 11, 129, 47) {
+            private final int slot = 11;
+            private int x;
+            private int y;
+
+            {
+                this.x = FridgeGuiMenu.this.x;
+                this.y = FridgeGuiMenu.this.y;
+            }
+        }));
+        this.customSlots.put(12, this.addSlot(new SlotItemHandler(this.internal, 12, 39, 65) {
+            private final int slot = 12;
+            private int x;
+            private int y;
+
+            {
+                this.x = FridgeGuiMenu.this.x;
+                this.y = FridgeGuiMenu.this.y;
+            }
+        }));
+        this.customSlots.put(13, this.addSlot(new SlotItemHandler(this.internal, 13, 57, 65) {
+            private final int slot = 13;
+            private int x;
+            private int y;
+
+            {
+                this.x = FridgeGuiMenu.this.x;
+                this.y = FridgeGuiMenu.this.y;
+            }
+        }));
+        this.customSlots.put(14, this.addSlot(new SlotItemHandler(this.internal, 14, 75, 65) {
+            private final int slot = 14;
+            private int x;
+            private int y;
+
+            {
+                this.x = FridgeGuiMenu.this.x;
+                this.y = FridgeGuiMenu.this.y;
+            }
+        }));
+        this.customSlots.put(15, this.addSlot(new SlotItemHandler(this.internal, 15, 93, 65) {
+            private final int slot = 15;
+            private int x;
+            private int y;
+
+            {
+                this.x = FridgeGuiMenu.this.x;
+                this.y = FridgeGuiMenu.this.y;
+            }
+        }));
+        this.customSlots.put(16, this.addSlot(new SlotItemHandler(this.internal, 16, 111, 65) {
+            private final int slot = 16;
+            private int x;
+            private int y;
+
+            {
+                this.x = FridgeGuiMenu.this.x;
+                this.y = FridgeGuiMenu.this.y;
+            }
+        }));
+        this.customSlots.put(17, this.addSlot(new SlotItemHandler(this.internal, 17, 129, 65) {
+            private final int slot = 17;
+            private int x;
+            private int y;
+
+            {
+                this.x = FridgeGuiMenu.this.x;
+                this.y = FridgeGuiMenu.this.y;
+            }
+        }));
+
+        for (int si = 0; si < 3; si++) {
+            for (int sj = 0; sj < 9; sj++) {
+                this.addSlot(new Slot(inv, sj + (si + 1) * 9, 13 + sj * 18, 96 + si * 18));
+            }
+        }
+
+        for (int si = 0; si < 9; si++) {
+            this.addSlot(new Slot(inv, si, 13 + si * 18, 154));
+        }
+    }
+
+    @Override
+    public boolean stillValid(Player player) {
+        if (this.bound) {
+            if (this.boundItemMatcher != null) {
+                return this.boundItemMatcher.get();
+            }
+
+            if (this.boundBlockEntity != null) {
+                return AbstractContainerMenu.stillValid(this.access, player, this.boundBlockEntity.getBlockState().getBlock());
+            }
+
+            if (this.boundEntity != null) {
+                return this.boundEntity.isAlive();
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public ItemStack quickMoveStack(Player playerIn, int index) {
+        ItemStack itemstack = ItemStack.EMPTY;
+        Slot slot = this.slots.get(index);
+        if (slot != null && slot.hasItem()) {
+            ItemStack itemstack1 = slot.getItem();
+            itemstack = itemstack1.copy();
+            if (index < 18) {
+                if (!this.moveItemStackTo(itemstack1, 18, this.slots.size(), true)) {
+                    return ItemStack.EMPTY;
+                }
+
+                slot.onQuickCraft(itemstack1, itemstack);
+            } else if (!this.moveItemStackTo(itemstack1, 0, 18, false)) {
+                if (index < 45) {
+                    if (!this.moveItemStackTo(itemstack1, 45, this.slots.size(), true)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (!this.moveItemStackTo(itemstack1, 18, 45, false)) {
+                    return ItemStack.EMPTY;
+                }
+
+                return ItemStack.EMPTY;
+            }
+
+            if (itemstack1.isEmpty()) {
+                slot.setByPlayer(ItemStack.EMPTY);
+            } else {
+                slot.setChanged();
+            }
+
+            if (itemstack1.getCount() == itemstack.getCount()) {
+                return ItemStack.EMPTY;
+            }
+
+            slot.onTake(playerIn, itemstack1);
+        }
+
+        return itemstack;
+    }
+
+    @Override
+    protected boolean moveItemStackTo(ItemStack p_38904_, int p_38905_, int p_38906_, boolean p_38907_) {
+        boolean flag = false;
+        int i = p_38905_;
+        if (p_38907_) {
+            i = p_38906_ - 1;
+        }
+
+        if (p_38904_.isStackable()) {
+            while (!p_38904_.isEmpty() && (p_38907_ ? i >= p_38905_ : i < p_38906_)) {
+                Slot slot = this.slots.get(i);
+                ItemStack itemstack = slot.getItem();
+                if (slot.mayPlace(itemstack) && !itemstack.isEmpty() && ItemStack.isSameItemSameTags(p_38904_, itemstack)) {
+                    int j = itemstack.getCount() + p_38904_.getCount();
+                    int maxSize = Math.min(slot.getMaxStackSize(), p_38904_.getMaxStackSize());
+                    if (j <= maxSize) {
+                        p_38904_.setCount(0);
+                        itemstack.setCount(j);
+                        slot.set(itemstack);
+                        flag = true;
+                    } else if (itemstack.getCount() < maxSize) {
+                        p_38904_.shrink(maxSize - itemstack.getCount());
+                        itemstack.setCount(maxSize);
+                        slot.set(itemstack);
+                        flag = true;
+                    }
+                }
+
+                if (p_38907_) {
+                    i--;
+                } else {
+                    i++;
+                }
+            }
+        }
+
+        if (!p_38904_.isEmpty()) {
+            if (p_38907_) {
+                i = p_38906_ - 1;
+            } else {
+                i = p_38905_;
+            }
+
+            while (p_38907_ ? i >= p_38905_ : i < p_38906_) {
+                Slot slot1 = this.slots.get(i);
+                ItemStack itemstack1 = slot1.getItem();
+                if (itemstack1.isEmpty() && slot1.mayPlace(p_38904_)) {
+                    if (p_38904_.getCount() > slot1.getMaxStackSize()) {
+                        slot1.setByPlayer(p_38904_.split(slot1.getMaxStackSize()));
+                    } else {
+                        slot1.setByPlayer(p_38904_.split(p_38904_.getCount()));
+                    }
+
+                    slot1.setChanged();
+                    flag = true;
+                    break;
+                }
+
+                if (p_38907_) {
+                    i--;
+                } else {
+                    i++;
+                }
+            }
+        }
+
+        return flag;
+    }
+
+    @Override
+    public void removed(Player playerIn) {
+        super.removed(playerIn);
+        if (!this.bound && playerIn instanceof ServerPlayer serverPlayer) {
+            if (serverPlayer.isAlive() && !serverPlayer.hasDisconnected()) {
+                for (int i = 0; i < this.internal.getSlots(); i++) {
+                    playerIn.getInventory().placeItemBackInInventory(this.internal.getStackInSlot(i));
+                    if (this.internal instanceof IItemHandlerModifiable ihm) {
+                        ihm.setStackInSlot(i, ItemStack.EMPTY);
+                    }
+                }
+            } else {
+                for (int j = 0; j < this.internal.getSlots(); j++) {
+                    playerIn.drop(this.internal.getStackInSlot(j), false);
+                    if (this.internal instanceof IItemHandlerModifiable ihm) {
+                        ihm.setStackInSlot(j, ItemStack.EMPTY);
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public Map<Integer, Slot> getSlots() {
+        return Collections.unmodifiableMap(this.customSlots);
+    }
+
+    @Override
+    public Map<String, Object> getMenuState() {
+        return this.menuState;
+    }
+}
