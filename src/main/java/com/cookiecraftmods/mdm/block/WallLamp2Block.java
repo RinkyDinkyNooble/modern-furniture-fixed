@@ -1,35 +1,12 @@
 package com.cookiecraftmods.mdm.block;
 
-import com.google.common.collect.ImmutableMap;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class WallLamp2Block extends HorizontalFurnitureBlock {
-    private final ImmutableMap<BlockState, VoxelShape> shapes = this.makeShapes();
 
     public WallLamp2Block() {
         super(Properties.of().sound(SoundType.WOOD).strength(1.0F, 10.0F).lightLevel(blockstate -> 15).noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
     }
 
-    private ImmutableMap<BlockState, VoxelShape> makeShapes() {
-        return this.getShapeForEachState(state -> {
-            return switch ((Direction)state.getValue(FACING)) {
-                case NORTH -> box(7.0, 6.0, 11.0, 9.0, 10.0, 16.0);
-                case EAST -> box(0.0, 6.0, 7.0, 5.0, 10.0, 9.0);
-                case WEST -> box(11.0, 6.0, 7.0, 16.0, 10.0, 9.0);
-                default -> box(7.0, 6.0, 0.0, 9.0, 10.0, 5.0);
-            };
-        });
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return (VoxelShape)this.shapes.get(state);
-    }
 }

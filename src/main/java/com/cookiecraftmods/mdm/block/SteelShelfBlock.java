@@ -1,6 +1,5 @@
 package com.cookiecraftmods.mdm.block;
 
-import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -21,14 +20,10 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class SteelShelfBlock extends Block implements SimpleWaterloggedBlock {
+public class SteelShelfBlock extends FurnitureBlock implements SimpleWaterloggedBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    private final ImmutableMap<BlockState, VoxelShape> shapes = this.makeShapes();
 
     public SteelShelfBlock() {
         super(
@@ -42,22 +37,6 @@ public class SteelShelfBlock extends Block implements SimpleWaterloggedBlock {
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, Boolean.valueOf(false)));
     }
 
-    private ImmutableMap<BlockState, VoxelShape> makeShapes() {
-        return this.getShapeForEachState(state -> {
-            return switch ((Direction)state.getValue(FACING)) {
-                case NORTH -> box(0.0, 0.0, 4.0, 16.0, 28.0, 16.0);
-                case EAST -> box(0.0, 0.0, 0.0, 12.0, 28.0, 16.0);
-                case WEST -> box(4.0, 0.0, 0.0, 16.0, 28.0, 16.0);
-                default -> box(0.0, 0.0, 0.0, 16.0, 28.0, 12.0);
-            };
-        });
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return (VoxelShape)this.shapes.get(state);
-    }
-
     @Override
     public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
         return state.getFluidState().isEmpty();
@@ -69,20 +48,15 @@ public class SteelShelfBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    public VoxelShape getVisualShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return Shapes.empty();
-    }
-
-    @Override
     protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(FACING, WATERLOGGED);
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    protected BlockState basePlacement(BlockPlaceContext context) {
         boolean flag = context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER;
-        return super.getStateForPlacement(context)
+        return super.basePlacement(context)
             .setValue(FACING, context.getHorizontalDirection().getOpposite())
             .setValue(WATERLOGGED, Boolean.valueOf(flag));
     }
@@ -94,7 +68,7 @@ public class SteelShelfBlock extends Block implements SimpleWaterloggedBlock {
 
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
+        return this.mirrorPart(state.rotate(mirrorIn.getRotation(state.getValue(FACING))));
     }
 
     @Override

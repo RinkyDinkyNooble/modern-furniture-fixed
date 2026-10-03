@@ -1,20 +1,23 @@
 package com.rinkynooble.modernfurniturefixed;
 
+import com.cookiecraftmods.mdm.block.FurnitureBlock;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.Property;
 
 /**
- * Placing, breaking and using furniture that is split into one block per space it fills.
+ * Placing, breaking and finding the parts of furniture that is split into one block per space it fills.
  * Each part works out its model and hitbox from its own block state, so a part whose neighbours are missing
  * (a building that lost a block, a part broken on its own) stays as it is.
  */
@@ -24,37 +27,67 @@ public final class SplitFurniture {
     private SplitFurniture() {
     }
 
-    /** The main part's state, or null if a space the other parts need isn't free. */
-    @Nullable
-    public static BlockState placementState(SplitLayout layout, BlockPlaceContext context, @Nullable BlockState state) {
-        if (state == null) {
-            return null;
-        }
-        Level level = context.getLevel();
-        Direction facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
-        BlockPos main = context.getClickedPos();
-        for (SplitPart part : layout.parts()) {
-            if (part == SplitPart.MAIN) {
-                continue;
-            }
-            BlockPos pos = layout.partPos(main, facing, part);
-            if (level.isOutsideBuildHeight(pos) || !level.getWorldBorder().isWithinBounds(pos)
-                    || !level.getBlockState(pos).canBeReplaced(context)) {
-                return null;
-            }
-        }
-        return state.setValue(layout.property(), SplitPart.MAIN);
+    public static SplitPart part(FurnitureBlock block, BlockState state) {
+        EnumProperty<SplitPart> property = block.furniture().partProperty();
+        return property != null ? state.getValue(property) : SplitPart.WHOLE;
     }
 
-    /** Places the other parts next to a main part that was just placed. */
-    public static void placeParts(SplitLayout layout, Level level, BlockPos pos, BlockState state) {
-        if (level.isClientSide || state.getValue(layout.property()) != SplitPart.MAIN) {
+    /**
+     * The part to place where the player clicked: the main part, or, if the piece doesn't fit there, a part
+     * below it in the same column, which raises the piece so its lowest part takes the clicked space (a tall
+     * mirror placed on the floor stands on the floor).
+     */
+    @Nullable
+    public static BlockState placedPart(FurnitureBlock block, BlockPlaceContext context, @Nullable BlockState main) {
+        EnumProperty<SplitPart> property = block.furniture().partProperty();
+        if (main == null || property == null || partsFit(block, main, context.getLevel(), context.getClickedPos())) {
+            return main;
+        }
+        for (int depth = 1; depth <= 2; depth++) {
+            for (SplitPart part : property.getPossibleValues()) {
+                BlockState candidate = main.setValue(property, part);
+                if (part != SplitPart.WHOLE && block.offset(candidate).equals(new Vec3i(0, -depth, 0))
+                        && partsFit(block, candidate, context.getLevel(), context.getClickedPos())) {
+                    return candidate;
+                }
+            }
+        }
+        return main;
+    }
+
+    /** True if the spaces the other parts need are free, for a part about to be placed at {@code pos}. */
+    public static boolean partsFit(FurnitureBlock block, BlockState state, LevelReader level, BlockPos pos) {
+        SplitPart placed = part(block, state);
+        if (placed == SplitPart.WHOLE) {
+            return true;
+        }
+        BlockPos main = pos.subtract(block.offset(state));
+        for (SplitPart part : block.furniture().partProperty().getPossibleValues()) {
+            if (part == SplitPart.WHOLE || part == placed) {
+                continue;
+            }
+            BlockState partState = state.setValue(block.furniture().partProperty(), part);
+            BlockPos partPos = main.offset(block.offset(partState));
+            BlockState there = level.getBlockState(partPos);
+            if (level.isOutsideBuildHeight(partPos) || !level.getWorldBorder().isWithinBounds(partPos)
+                    || !(there.canBeReplaced() || samePiece(there, partState, block))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /** Places the other parts around a part that a player just placed. */
+    public static void placeParts(FurnitureBlock block, Level level, BlockPos pos, BlockState state) {
+        SplitPart placed = part(block, state);
+        if (level.isClientSide || placed == SplitPart.WHOLE) {
             return;
         }
-        Direction facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
-        for (SplitPart part : layout.parts()) {
-            if (part != SplitPart.MAIN) {
-                level.setBlock(layout.partPos(pos, facing, part), state.setValue(layout.property(), part), Block.UPDATE_ALL);
+        BlockPos main = pos.subtract(block.offset(state));
+        for (SplitPart part : block.furniture().partProperty().getPossibleValues()) {
+            if (part != SplitPart.WHOLE && part != placed) {
+                BlockState partState = state.setValue(block.furniture().partProperty(), part);
+                level.setBlock(main.offset(block.offset(partState)), partState, Block.UPDATE_ALL);
             }
         }
         level.blockUpdated(pos, Blocks.AIR);
@@ -63,23 +96,23 @@ public final class SplitFurniture {
 
     /**
      * When a player breaks a part and the server config says to, breaks the rest of the piece too.
-     * The main part is broken normally, so it drops the item and its contents once; the others are removed.
+     * The main part is broken normally, so it drops the item once; the others are removed, and the part
+     * that holds the storage drops its contents as it goes.
      */
-    public static void breakPiece(SplitLayout layout, Level level, BlockPos pos, BlockState state, Player player) {
-        EnumProperty<SplitPart> property = layout.property();
-        SplitPart broken = state.getValue(property);
+    public static void breakPiece(FurnitureBlock block, Level level, BlockPos pos, BlockState state, Player player) {
+        SplitPart broken = part(block, state);
         if (level.isClientSide || broken == SplitPart.WHOLE || !MffConfig.breakWholePiece()) {
             return;
         }
-        Direction facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
-        BlockPos main = layout.mainPos(pos, facing, broken);
-        for (SplitPart part : layout.parts()) {
-            if (part == broken) {
+        BlockPos main = pos.subtract(block.offset(state));
+        for (SplitPart part : block.furniture().partProperty().getPossibleValues()) {
+            if (part == SplitPart.WHOLE || part == broken) {
                 continue;
             }
-            BlockPos partPos = layout.partPos(main, facing, part);
+            BlockState expected = state.setValue(block.furniture().partProperty(), part);
+            BlockPos partPos = main.offset(block.offset(expected));
             BlockState partState = level.getBlockState(partPos);
-            if (!isPart(partState, state, layout, part)) {
+            if (!samePiece(partState, expected, block)) {
                 continue;
             }
             if (part == SplitPart.MAIN) {
@@ -91,32 +124,43 @@ public final class SplitFurniture {
         }
     }
 
-    /** Where the part that holds the piece's item and contents is, or null if it's missing. */
+    /** Where another part of the same piece is, or null if it isn't there. */
     @Nullable
-    public static BlockPos holderPos(SplitLayout layout, BlockGetter level, BlockPos pos, BlockState state) {
-        SplitPart part = state.getValue(layout.property());
-        if (holdsItems(layout, state)) {
+    public static BlockPos find(FurnitureBlock block, BlockGetter level, BlockPos pos, BlockState state, SplitPart part) {
+        if (part(block, state) == part) {
             return pos;
         }
-        BlockPos main = layout.mainPos(pos, state.getValue(BlockStateProperties.HORIZONTAL_FACING), part);
-        return isPart(level.getBlockState(main), state, layout, SplitPart.MAIN) ? main : null;
+        BlockState expected = state.setValue(block.furniture().partProperty(), part);
+        BlockPos found = pos.subtract(block.offset(state)).offset(block.offset(expected));
+        return samePiece(level.getBlockState(found), expected, block) ? found : null;
     }
 
-    /** True for the part that drops the item and keeps the contents: the main part, or an unsplit piece. */
-    public static boolean holdsItems(SplitLayout layout, BlockState state) {
-        SplitPart part = state.getValue(layout.property());
+    /** True for the part that drops the furniture's item: the main part, or an unsplit piece. */
+    public static boolean dropsItem(FurnitureBlock block, BlockState state) {
+        SplitPart part = part(block, state);
         return part == SplitPart.MAIN || part == SplitPart.WHOLE;
     }
 
-    /** Swaps left and right after the piece is mirrored, when the piece has both sides. */
-    public static BlockState mirror(SplitLayout layout, BlockState mirrored) {
-        SplitPart swapped = mirrored.getValue(layout.property()).mirrored();
-        return layout.property().getPossibleValues().contains(swapped) ? mirrored.setValue(layout.property(), swapped) : mirrored;
+    /** Swaps left and right after a piece is mirrored, when the piece has both sides. */
+    public static BlockState mirrorPart(FurnitureBlock block, BlockState mirrored) {
+        EnumProperty<SplitPart> property = block.furniture().partProperty();
+        if (property == null) {
+            return mirrored;
+        }
+        SplitPart swapped = mirrored.getValue(property).mirrored();
+        return property.getPossibleValues().contains(swapped) ? mirrored.setValue(property, swapped) : mirrored;
     }
 
-    private static boolean isPart(BlockState candidate, BlockState piece, SplitLayout layout, SplitPart part) {
-        return candidate.is(piece.getBlock())
-                && candidate.getValue(BlockStateProperties.HORIZONTAL_FACING) == piece.getValue(BlockStateProperties.HORIZONTAL_FACING)
-                && candidate.getValue(layout.property()) == part;
+    /** True if a block state is the expected part of the same piece: same block, same part, same facing. */
+    private static boolean samePiece(BlockState candidate, BlockState expected, FurnitureBlock block) {
+        if (!candidate.is(block) || part(block, candidate) != part(block, expected)) {
+            return false;
+        }
+        for (Property<?> property : candidate.getProperties()) {
+            if (property != BlockStateProperties.WATERLOGGED && !candidate.getValue(property).equals(expected.getValue(property))) {
+                return false;
+            }
+        }
+        return true;
     }
 }

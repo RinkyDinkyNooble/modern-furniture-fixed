@@ -13,7 +13,17 @@ public enum SplitPart implements StringRepresentable {
     RIGHT("right"),
     TOP("top"),
     TOP_LEFT("top_left"),
-    TOP_RIGHT("top_right");
+    TOP_RIGHT("top_right"),
+    TOP_BACK("top_back"),
+    BOTTOM("bottom"),
+    BOTTOM_LEFT("bottom_left"),
+    BOTTOM_RIGHT("bottom_right"),
+    FRONT("front"),
+    FRONT_LEFT("front_left"),
+    FRONT_RIGHT("front_right"),
+    BACK("back"),
+    BACK_LEFT("back_left"),
+    BACK_RIGHT("back_right");
 
     private final String name;
 
@@ -28,13 +38,8 @@ public enum SplitPart implements StringRepresentable {
 
     /** The part in the mirror-image position: left and right swap. */
     public SplitPart mirrored() {
-        return switch (this) {
-            case LEFT -> RIGHT;
-            case RIGHT -> LEFT;
-            case TOP_LEFT -> TOP_RIGHT;
-            case TOP_RIGHT -> TOP_LEFT;
-            default -> this;
-        };
+        String swapped = this.name.contains("left") ? this.name.replace("left", "right") : this.name.replace("right", "left");
+        return byName(swapped);
     }
 
     public static SplitPart byName(String name) {

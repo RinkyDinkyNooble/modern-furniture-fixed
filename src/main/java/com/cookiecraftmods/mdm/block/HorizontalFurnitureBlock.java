@@ -26,8 +26,8 @@ public class HorizontalFurnitureBlock extends FurnitureBlock {
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return super.getStateForPlacement(context).setValue(FACING, context.getHorizontalDirection().getOpposite());
+    protected BlockState basePlacement(BlockPlaceContext context) {
+        return super.basePlacement(context).setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @Override
@@ -37,6 +37,6 @@ public class HorizontalFurnitureBlock extends FurnitureBlock {
 
     @Override
     public BlockState mirror(BlockState state, Mirror mirror) {
-        return state.rotate(mirror.getRotation(state.getValue(FACING)));
+        return this.mirrorPart(state.rotate(mirror.getRotation(state.getValue(FACING))));
     }
 }

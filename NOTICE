@@ -1,0 +1,6 @@
+Modern Furniture Fixed is a modified version of MDM (Modern Decorations Mod) 26.9 by opaleq
+(https://cookiecraftmods.com/), which its CurseForge page licenses under the Academic Free License 3.0.
+
+The files under src/main/java/com/cookiecraftmods and src/main/resources/assets/mdm come from MDM and
+were changed; FIXES.md lists the changes. Everything added by Modern Furniture Fixed is released under the
+BSD Zero Clause License (LICENSE).
