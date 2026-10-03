@@ -1,21 +1,20 @@
 package com.cookiecraftmods.mdm.block.entity;
 
 import com.cookiecraftmods.mdm.init.MdmModBlockEntities;
-import com.cookiecraftmods.mdm.world.inventory.StorageMenu;
-import io.netty.buffer.Unpooled;
 import java.util.stream.IntStream;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ChestMenu;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -26,7 +25,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
 public class BedroomSet1greyBunkBedBlockEntity extends RandomizableContainerBlockEntity implements WorldlyContainer {
-    private NonNullList<ItemStack> stacks = NonNullList.withSize(14, ItemStack.EMPTY);
+    private NonNullList<ItemStack> stacks = NonNullList.withSize(18, ItemStack.EMPTY);
     private final LazyOptional<? extends IItemHandler>[] handlers = SidedInvWrapper.create(this, Direction.values());
 
     public BedroomSet1greyBunkBedBlockEntity(BlockPos position, BlockState state) {
@@ -88,7 +87,7 @@ public class BedroomSet1greyBunkBedBlockEntity extends RandomizableContainerBloc
 
     @Override
     public AbstractContainerMenu createMenu(int id, Inventory inventory) {
-        return new StorageMenu(id, inventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(this.worldPosition));
+        return new ChestMenu(MenuType.GENERIC_9x2, id, inventory, this, 2);
     }
 
     @Override

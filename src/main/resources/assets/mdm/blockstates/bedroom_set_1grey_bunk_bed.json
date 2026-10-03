@@ -1,18 +1,78 @@
 {
   "variants": {
-    "facing=north": {
+    "facing=north,part=whole": {
       "model": "mdm:block/bedroom_set_1grey_bunk_bed"
     },
-    "facing=east": {
+    "facing=north,part=main": {
+      "model": "mdm:block/split/bedroom_set_1grey_bunk_bed/main"
+    },
+    "facing=north,part=right": {
+      "model": "mdm:block/split/bedroom_set_1grey_bunk_bed/right"
+    },
+    "facing=north,part=top": {
+      "model": "mdm:block/split/bedroom_set_1grey_bunk_bed/top"
+    },
+    "facing=north,part=top_right": {
+      "model": "mdm:block/split/bedroom_set_1grey_bunk_bed/top_right"
+    },
+    "facing=east,part=whole": {
       "model": "mdm:block/bedroom_set_1grey_bunk_bed",
       "y": 90
     },
-    "facing=south": {
+    "facing=east,part=main": {
+      "model": "mdm:block/split/bedroom_set_1grey_bunk_bed/main",
+      "y": 90
+    },
+    "facing=east,part=right": {
+      "model": "mdm:block/split/bedroom_set_1grey_bunk_bed/right",
+      "y": 90
+    },
+    "facing=east,part=top": {
+      "model": "mdm:block/split/bedroom_set_1grey_bunk_bed/top",
+      "y": 90
+    },
+    "facing=east,part=top_right": {
+      "model": "mdm:block/split/bedroom_set_1grey_bunk_bed/top_right",
+      "y": 90
+    },
+    "facing=south,part=whole": {
       "model": "mdm:block/bedroom_set_1grey_bunk_bed",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,part=main": {
+      "model": "mdm:block/split/bedroom_set_1grey_bunk_bed/main",
+      "y": 180
+    },
+    "facing=south,part=right": {
+      "model": "mdm:block/split/bedroom_set_1grey_bunk_bed/right",
+      "y": 180
+    },
+    "facing=south,part=top": {
+      "model": "mdm:block/split/bedroom_set_1grey_bunk_bed/top",
+      "y": 180
+    },
+    "facing=south,part=top_right": {
+      "model": "mdm:block/split/bedroom_set_1grey_bunk_bed/top_right",
+      "y": 180
+    },
+    "facing=west,part=whole": {
       "model": "mdm:block/bedroom_set_1grey_bunk_bed",
+      "y": 270
+    },
+    "facing=west,part=main": {
+      "model": "mdm:block/split/bedroom_set_1grey_bunk_bed/main",
+      "y": 270
+    },
+    "facing=west,part=right": {
+      "model": "mdm:block/split/bedroom_set_1grey_bunk_bed/right",
+      "y": 270
+    },
+    "facing=west,part=top": {
+      "model": "mdm:block/split/bedroom_set_1grey_bunk_bed/top",
+      "y": 270
+    },
+    "facing=west,part=top_right": {
+      "model": "mdm:block/split/bedroom_set_1grey_bunk_bed/top_right",
       "y": 270
     }
   }

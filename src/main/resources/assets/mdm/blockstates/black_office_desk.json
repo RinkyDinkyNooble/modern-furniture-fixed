@@ -1,18 +1,63 @@
 {
   "variants": {
-    "facing=north": {
+    "facing=north,part=whole": {
       "model": "mdm:block/black_office_desk"
     },
-    "facing=east": {
+    "facing=north,part=left": {
+      "model": "mdm:block/split/black_office_desk/left"
+    },
+    "facing=north,part=main": {
+      "model": "mdm:block/split/black_office_desk/main"
+    },
+    "facing=north,part=right": {
+      "model": "mdm:block/split/black_office_desk/right"
+    },
+    "facing=east,part=whole": {
       "model": "mdm:block/black_office_desk",
       "y": 90
     },
-    "facing=south": {
+    "facing=east,part=left": {
+      "model": "mdm:block/split/black_office_desk/left",
+      "y": 90
+    },
+    "facing=east,part=main": {
+      "model": "mdm:block/split/black_office_desk/main",
+      "y": 90
+    },
+    "facing=east,part=right": {
+      "model": "mdm:block/split/black_office_desk/right",
+      "y": 90
+    },
+    "facing=south,part=whole": {
       "model": "mdm:block/black_office_desk",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,part=left": {
+      "model": "mdm:block/split/black_office_desk/left",
+      "y": 180
+    },
+    "facing=south,part=main": {
+      "model": "mdm:block/split/black_office_desk/main",
+      "y": 180
+    },
+    "facing=south,part=right": {
+      "model": "mdm:block/split/black_office_desk/right",
+      "y": 180
+    },
+    "facing=west,part=whole": {
       "model": "mdm:block/black_office_desk",
+      "y": 270
+    },
+    "facing=west,part=left": {
+      "model": "mdm:block/split/black_office_desk/left",
+      "y": 270
+    },
+    "facing=west,part=main": {
+      "model": "mdm:block/split/black_office_desk/main",
+      "y": 270
+    },
+    "facing=west,part=right": {
+      "model": "mdm:block/split/black_office_desk/right",
       "y": 270
     }
   }

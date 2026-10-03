@@ -4,7 +4,8 @@ For each block id, reads its blockstate and model chain from MDM's jar, cuts eve
 block-space boundaries (scaling face UVs to match), and writes:
   - assets/mdm/blockstates/<id>.json   the original variants for part=whole, plus one per part and facing
   - assets/mdm/models/block/split/<id>/<part>.json   one model per part, moved into its own block space
-  - mff/parts/<id>.json   each part's offset and hitbox boxes (facing north), read by the mod
+  - mff/parts/<id>.json   each part's offset and hitbox boxes (facing north), read by the mod; the
+    unsplit piece's hitbox is all of them together
 
 Part names describe where a part sits as seen by someone looking at the front of the furniture:
 right/left (x), top/bottom (y), front/back (z), with a 2 for two spaces away. "main" is the space the
@@ -216,8 +217,7 @@ def split_block(jar, block_id):
         for pname in parts:
             nv = {k: val for k, val in v.items() if k != "model"}
             new_bs["variants"][f"{key},part={pname}"] = dict({"model": f"{ns}:block/split/{name}/{pname}"}, **nv)
-    whole = {"offset": [0, 0, 0], "boxes": parts["main"]["boxes"]}
-    data = {"block": block_id, "parts": dict({"whole": whole}, **parts)}
+    data = {"block": block_id, "parts": parts}
     return new_bs, models, data
 
 

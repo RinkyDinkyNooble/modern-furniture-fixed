@@ -5,6 +5,7 @@ import com.cookiecraftmods.mdm.init.MdmModBlocks;
 import com.cookiecraftmods.mdm.init.MdmModItems;
 import com.cookiecraftmods.mdm.init.MdmModMenus;
 import com.cookiecraftmods.mdm.init.MdmModTabs;
+import com.rinkynooble.modernfurniturefixed.MffConfig;
 import it.unimi.dsi.fastutil.ints.IntObjectImmutablePair;
 import it.unimi.dsi.fastutil.ints.IntObjectPair;
 import java.util.Comparator;
@@ -22,7 +23,9 @@ import net.minecraftforge.event.TickEvent.Phase;
 import net.minecraftforge.event.TickEvent.ServerTickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.util.thread.SidedThreadGroups;
 import net.minecraftforge.network.NetworkRegistry;
@@ -49,6 +52,7 @@ public class MdmMod {
         MdmModItems.REGISTRY.register(bus);
         MdmModTabs.REGISTRY.register(bus);
         MdmModMenus.REGISTRY.register(bus);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, MffConfig.SPEC);
     }
 
     public static <T> void addNetworkMessage(

@@ -1,21 +1,21 @@
 package com.cookiecraftmods.mdm.block;
 
 import com.cookiecraftmods.mdm.block.entity.BedroomSet1greyBunkBedBlockEntity;
-import com.cookiecraftmods.mdm.world.inventory.StorageMenu;
-import com.google.common.collect.ImmutableMap;
-import io.netty.buffer.Unpooled;
+import com.rinkynooble.modernfurniturefixed.SplitFurniture;
+import com.rinkynooble.modernfurniturefixed.SplitLayout;
+import com.rinkynooble.modernfurniturefixed.SplitPart;
+import java.util.List;
+import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
-import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -30,16 +30,19 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.network.NetworkHooks;
 
 public class BedroomSet1greyBunkBedBlock extends Block implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-    private final ImmutableMap<BlockState, VoxelShape> shapes = this.makeShapes();
+    private static final SplitLayout LAYOUT = SplitLayout.load("bedroom_set_1grey_bunk_bed");
+    public static final EnumProperty<SplitPart> PART = LAYOUT.property();
 
     public BedroomSet1greyBunkBedBlock() {
         super(
@@ -49,24 +52,14 @@ public class BedroomSet1greyBunkBedBlock extends Block implements EntityBlock {
                 .noOcclusion()
                 .isRedstoneConductor((bs, br, bp) -> false)
                 .instrument(NoteBlockInstrument.BASEDRUM)
+                .pushReaction(PushReaction.BLOCK)
         );
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
-    }
-
-    private ImmutableMap<BlockState, VoxelShape> makeShapes() {
-        return this.getShapeForEachState(state -> {
-            return switch ((Direction)state.getValue(FACING)) {
-                case NORTH -> box(-16.0, 0.0, 0.0, 16.0, 28.0, 16.0);
-                case EAST -> box(0.0, 0.0, -16.0, 16.0, 28.0, 16.0);
-                case WEST -> box(0.0, 0.0, 0.0, 16.0, 28.0, 32.0);
-                default -> box(0.0, 0.0, 0.0, 32.0, 28.0, 16.0);
-            };
-        });
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(PART, SplitPart.WHOLE));
     }
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return (VoxelShape)this.shapes.get(state);
+        return LAYOUT.shape(state.getValue(FACING), state.getValue(PART));
     }
 
     @Override
@@ -77,12 +70,30 @@ public class BedroomSet1greyBunkBedBlock extends Block implements EntityBlock {
     @Override
     protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(FACING);
+        builder.add(FACING, PART);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return super.getStateForPlacement(context).setValue(FACING, context.getHorizontalDirection().getOpposite());
+        BlockState state = super.getStateForPlacement(context).setValue(FACING, context.getHorizontalDirection().getOpposite());
+        return SplitFurniture.placementState(LAYOUT, context, state);
+    }
+
+    @Override
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        super.setPlacedBy(level, pos, state, placer, stack);
+        SplitFurniture.placeParts(LAYOUT, level, pos, state);
+    }
+
+    @Override
+    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        SplitFurniture.breakPiece(LAYOUT, level, pos, state, player);
+        super.playerWillDestroy(level, pos, state, player);
+    }
+
+    @Override
+    public List<ItemStack> getDrops(BlockState state, LootParams.Builder params) {
+        return SplitFurniture.holdsItems(LAYOUT, state) ? super.getDrops(state, params) : List.of();
     }
 
     @Override
@@ -92,27 +103,19 @@ public class BedroomSet1greyBunkBedBlock extends Block implements EntityBlock {
 
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
+        return SplitFurniture.mirror(LAYOUT, state.rotate(mirrorIn.getRotation(state.getValue(FACING))));
     }
 
     @Override
-    public InteractionResult use(BlockState blockstate, Level world, final BlockPos pos, Player entity, InteractionHand hand, BlockHitResult hit) {
-        super.use(blockstate, world, pos, entity, hand, hit);
-        if (entity instanceof ServerPlayer player) {
-            NetworkHooks.openScreen(player, new MenuProvider() {
-                @Override
-                public Component getDisplayName() {
-                    return Component.literal("Bedroom Set 1 Grey Bunk Bed");
-                }
-
-                @Override
-                public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-                    return new StorageMenu(id, inventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(pos));
-                }
-            }, pos);
+    public InteractionResult use(BlockState blockstate, Level world, BlockPos pos, Player entity, InteractionHand hand, BlockHitResult hit) {
+        BlockPos holder = SplitFurniture.holderPos(LAYOUT, world, pos, blockstate);
+        if (holder == null) {
+            return InteractionResult.PASS;
         }
-
-        return InteractionResult.SUCCESS;
+        if (!world.isClientSide && world.getBlockEntity(holder) instanceof BedroomSet1greyBunkBedBlockEntity be) {
+            entity.openMenu(be);
+        }
+        return InteractionResult.sidedSuccess(world.isClientSide);
     }
 
     @Override
@@ -122,7 +125,7 @@ public class BedroomSet1greyBunkBedBlock extends Block implements EntityBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new BedroomSet1greyBunkBedBlockEntity(pos, state);
+        return SplitFurniture.holdsItems(LAYOUT, state) ? new BedroomSet1greyBunkBedBlockEntity(pos, state) : null;
     }
 
     @Override
