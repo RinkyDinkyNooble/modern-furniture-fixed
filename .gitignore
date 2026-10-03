@@ -1,0 +1,29 @@
+# Gradle
+.gradle/
+build/
+
+# Forge dev runs
+run/
+
+# Jars to build against go here (see README)
+/libs
+
+# IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.classpath
+.project
+.settings/
+bin/
+out/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Private notes
+/research
