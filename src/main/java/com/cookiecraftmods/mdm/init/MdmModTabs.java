@@ -262,22 +262,11 @@ public class MdmModTabs {
                     tabData.accept(MdmModBlocks.BOXES.get().asItem());
                     tabData.accept(MdmModBlocks.COAT_HANGER.get().asItem());
                     tabData.accept(MdmModBlocks.DOOR_MAT.get().asItem());
-                    tabData.accept(MdmModBlocks.ELECTRIC_GUITAR_BLACK.get().asItem());
-                    tabData.accept(MdmModBlocks.ELECTRIC_GUITAR_WITH_STAND.get().asItem());
                     tabData.accept(MdmModBlocks.FOYER_BENCH.get().asItem());
                     tabData.accept(MdmModBlocks.ENTRYWAY_CARPET.get().asItem());
                     tabData.accept(MdmModBlocks.FOYER_BENCH_DARK.get().asItem());
                     tabData.accept(MdmModBlocks.FOYER_BENCH_WHITE.get().asItem());
                     tabData.accept(MdmModBlocks.FOYER_BENCH_WENGE.get().asItem());
-                    tabData.accept(MdmModBlocks.PAIR_OF_BOOTS.get().asItem());
-                    tabData.accept(MdmModBlocks.PAIR_OF_BOOTS_2.get().asItem());
-                    tabData.accept(MdmModBlocks.PAIR_OF_BOOTS_3.get().asItem());
-                    tabData.accept(MdmModBlocks.PAIR_OF_BOOTS_4.get().asItem());
-                    tabData.accept(MdmModBlocks.PAIR_OF_BOOTS_5.get().asItem());
-                    tabData.accept(MdmModBlocks.PAIR_OF_BOOTS_6.get().asItem());
-                    tabData.accept(MdmModBlocks.SHOE_RACK.get().asItem());
-                    tabData.accept(MdmModBlocks.SHOE_RACK_2.get().asItem());
-                    tabData.accept(MdmModBlocks.SHOE_RACK_3.get().asItem());
                     tabData.accept(MdmModBlocks.TALL_MIRROR.get().asItem());
                 })
                 .withSearchBar()

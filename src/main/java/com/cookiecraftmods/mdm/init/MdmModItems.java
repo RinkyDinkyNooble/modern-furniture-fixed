@@ -259,22 +259,11 @@ public class MdmModItems {
     public static final RegistryObject<Item> BOXES = block(MdmModBlocks.BOXES);
     public static final RegistryObject<Item> COAT_HANGER = block(MdmModBlocks.COAT_HANGER);
     public static final RegistryObject<Item> DOOR_MAT = block(MdmModBlocks.DOOR_MAT);
-    public static final RegistryObject<Item> ELECTRIC_GUITAR_BLACK = block(MdmModBlocks.ELECTRIC_GUITAR_BLACK);
-    public static final RegistryObject<Item> ELECTRIC_GUITAR_WITH_STAND = block(MdmModBlocks.ELECTRIC_GUITAR_WITH_STAND);
     public static final RegistryObject<Item> ENTRYWAY_CARPET = block(MdmModBlocks.ENTRYWAY_CARPET);
     public static final RegistryObject<Item> FOYER_BENCH = block(MdmModBlocks.FOYER_BENCH);
     public static final RegistryObject<Item> FOYER_BENCH_DARK = block(MdmModBlocks.FOYER_BENCH_DARK);
     public static final RegistryObject<Item> FOYER_BENCH_WHITE = block(MdmModBlocks.FOYER_BENCH_WHITE);
     public static final RegistryObject<Item> FOYER_BENCH_WENGE = block(MdmModBlocks.FOYER_BENCH_WENGE);
-    public static final RegistryObject<Item> PAIR_OF_BOOTS = block(MdmModBlocks.PAIR_OF_BOOTS);
-    public static final RegistryObject<Item> PAIR_OF_BOOTS_2 = block(MdmModBlocks.PAIR_OF_BOOTS_2);
-    public static final RegistryObject<Item> PAIR_OF_BOOTS_3 = block(MdmModBlocks.PAIR_OF_BOOTS_3);
-    public static final RegistryObject<Item> PAIR_OF_BOOTS_4 = block(MdmModBlocks.PAIR_OF_BOOTS_4);
-    public static final RegistryObject<Item> PAIR_OF_BOOTS_5 = block(MdmModBlocks.PAIR_OF_BOOTS_5);
-    public static final RegistryObject<Item> PAIR_OF_BOOTS_6 = block(MdmModBlocks.PAIR_OF_BOOTS_6);
-    public static final RegistryObject<Item> SHOE_RACK = block(MdmModBlocks.SHOE_RACK);
-    public static final RegistryObject<Item> SHOE_RACK_2 = block(MdmModBlocks.SHOE_RACK_2);
-    public static final RegistryObject<Item> SHOE_RACK_3 = block(MdmModBlocks.SHOE_RACK_3);
     public static final RegistryObject<Item> TALL_MIRROR = block(MdmModBlocks.TALL_MIRROR);
 
     private static RegistryObject<Item> block(RegistryObject<Block> block) {
