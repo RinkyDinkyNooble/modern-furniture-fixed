@@ -1,18 +1,63 @@
 {
   "variants": {
-    "facing=north": {
+    "facing=north,part=whole": {
       "model": "mdm:block/black_bench"
     },
-    "facing=east": {
+    "facing=north,part=left": {
+      "model": "mdm:block/split/black_bench/left"
+    },
+    "facing=north,part=main": {
+      "model": "mdm:block/split/black_bench/main"
+    },
+    "facing=north,part=right": {
+      "model": "mdm:block/split/black_bench/right"
+    },
+    "facing=east,part=whole": {
       "model": "mdm:block/black_bench",
       "y": 90
     },
-    "facing=south": {
+    "facing=east,part=left": {
+      "model": "mdm:block/split/black_bench/left",
+      "y": 90
+    },
+    "facing=east,part=main": {
+      "model": "mdm:block/split/black_bench/main",
+      "y": 90
+    },
+    "facing=east,part=right": {
+      "model": "mdm:block/split/black_bench/right",
+      "y": 90
+    },
+    "facing=south,part=whole": {
       "model": "mdm:block/black_bench",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,part=left": {
+      "model": "mdm:block/split/black_bench/left",
+      "y": 180
+    },
+    "facing=south,part=main": {
+      "model": "mdm:block/split/black_bench/main",
+      "y": 180
+    },
+    "facing=south,part=right": {
+      "model": "mdm:block/split/black_bench/right",
+      "y": 180
+    },
+    "facing=west,part=whole": {
       "model": "mdm:block/black_bench",
+      "y": 270
+    },
+    "facing=west,part=left": {
+      "model": "mdm:block/split/black_bench/left",
+      "y": 270
+    },
+    "facing=west,part=main": {
+      "model": "mdm:block/split/black_bench/main",
+      "y": 270
+    },
+    "facing=west,part=right": {
+      "model": "mdm:block/split/black_bench/right",
       "y": 270
     }
   }

@@ -1,0 +1,78 @@
+{
+  "textures": {
+    "all": "mdm:block/cork_board",
+    "particle": "mdm:block/cork_board",
+    "0": "mdm:block/cork_board"
+  },
+  "elements": [
+    {
+      "from": [
+        4,
+        -2,
+        15
+      ],
+      "to": [
+        16,
+        18,
+        16
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          23,
+          7,
+          14
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            3.5,
+            0.0,
+            5.0,
+            2.5
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            1.5,
+            2.5
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            5.0,
+            2.625,
+            5.125,
+            5.125
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            5.0,
+            5.125,
+            3.5,
+            5.0
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            10.0,
+            0.0,
+            8.5,
+            0.125
+          ],
+          "texture": "#0"
+        }
+      }
+    }
+  ],
+  "render_type": "solid"
+}

@@ -1,18 +1,78 @@
 {
   "variants": {
-    "facing=north": {
+    "facing=north,part=whole": {
       "model": "mdm:block/bathroom_shelf_02"
     },
-    "facing=east": {
+    "facing=north,part=left": {
+      "model": "mdm:block/split/bathroom_shelf_02/left"
+    },
+    "facing=north,part=main": {
+      "model": "mdm:block/split/bathroom_shelf_02/main"
+    },
+    "facing=north,part=right": {
+      "model": "mdm:block/split/bathroom_shelf_02/right"
+    },
+    "facing=north,part=top": {
+      "model": "mdm:block/split/bathroom_shelf_02/top"
+    },
+    "facing=east,part=whole": {
       "model": "mdm:block/bathroom_shelf_02",
       "y": 90
     },
-    "facing=south": {
+    "facing=east,part=left": {
+      "model": "mdm:block/split/bathroom_shelf_02/left",
+      "y": 90
+    },
+    "facing=east,part=main": {
+      "model": "mdm:block/split/bathroom_shelf_02/main",
+      "y": 90
+    },
+    "facing=east,part=right": {
+      "model": "mdm:block/split/bathroom_shelf_02/right",
+      "y": 90
+    },
+    "facing=east,part=top": {
+      "model": "mdm:block/split/bathroom_shelf_02/top",
+      "y": 90
+    },
+    "facing=south,part=whole": {
       "model": "mdm:block/bathroom_shelf_02",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,part=left": {
+      "model": "mdm:block/split/bathroom_shelf_02/left",
+      "y": 180
+    },
+    "facing=south,part=main": {
+      "model": "mdm:block/split/bathroom_shelf_02/main",
+      "y": 180
+    },
+    "facing=south,part=right": {
+      "model": "mdm:block/split/bathroom_shelf_02/right",
+      "y": 180
+    },
+    "facing=south,part=top": {
+      "model": "mdm:block/split/bathroom_shelf_02/top",
+      "y": 180
+    },
+    "facing=west,part=whole": {
       "model": "mdm:block/bathroom_shelf_02",
+      "y": 270
+    },
+    "facing=west,part=left": {
+      "model": "mdm:block/split/bathroom_shelf_02/left",
+      "y": 270
+    },
+    "facing=west,part=main": {
+      "model": "mdm:block/split/bathroom_shelf_02/main",
+      "y": 270
+    },
+    "facing=west,part=right": {
+      "model": "mdm:block/split/bathroom_shelf_02/right",
+      "y": 270
+    },
+    "facing=west,part=top": {
+      "model": "mdm:block/split/bathroom_shelf_02/top",
       "y": 270
     }
   }

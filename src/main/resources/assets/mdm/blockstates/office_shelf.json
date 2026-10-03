@@ -1,18 +1,48 @@
 {
   "variants": {
-    "facing=north": {
+    "facing=north,part=whole": {
       "model": "mdm:block/office_shelf"
     },
-    "facing=east": {
+    "facing=north,part=main": {
+      "model": "mdm:block/split/office_shelf/main"
+    },
+    "facing=north,part=top": {
+      "model": "mdm:block/split/office_shelf/top"
+    },
+    "facing=east,part=whole": {
       "model": "mdm:block/office_shelf",
       "y": 90
     },
-    "facing=south": {
+    "facing=east,part=main": {
+      "model": "mdm:block/split/office_shelf/main",
+      "y": 90
+    },
+    "facing=east,part=top": {
+      "model": "mdm:block/split/office_shelf/top",
+      "y": 90
+    },
+    "facing=south,part=whole": {
       "model": "mdm:block/office_shelf",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,part=main": {
+      "model": "mdm:block/split/office_shelf/main",
+      "y": 180
+    },
+    "facing=south,part=top": {
+      "model": "mdm:block/split/office_shelf/top",
+      "y": 180
+    },
+    "facing=west,part=whole": {
       "model": "mdm:block/office_shelf",
+      "y": 270
+    },
+    "facing=west,part=main": {
+      "model": "mdm:block/split/office_shelf/main",
+      "y": 270
+    },
+    "facing=west,part=top": {
+      "model": "mdm:block/split/office_shelf/top",
       "y": 270
     }
   }

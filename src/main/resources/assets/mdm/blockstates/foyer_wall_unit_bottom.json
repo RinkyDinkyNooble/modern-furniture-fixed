@@ -1,18 +1,48 @@
 {
   "variants": {
-    "facing=north": {
+    "facing=north,part=whole": {
       "model": "mdm:block/foyer_wall_unit_bottom"
     },
-    "facing=east": {
+    "facing=north,part=main": {
+      "model": "mdm:block/split/foyer_wall_unit_bottom/main"
+    },
+    "facing=north,part=right": {
+      "model": "mdm:block/split/foyer_wall_unit_bottom/right"
+    },
+    "facing=east,part=whole": {
       "model": "mdm:block/foyer_wall_unit_bottom",
       "y": 90
     },
-    "facing=south": {
+    "facing=east,part=main": {
+      "model": "mdm:block/split/foyer_wall_unit_bottom/main",
+      "y": 90
+    },
+    "facing=east,part=right": {
+      "model": "mdm:block/split/foyer_wall_unit_bottom/right",
+      "y": 90
+    },
+    "facing=south,part=whole": {
       "model": "mdm:block/foyer_wall_unit_bottom",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,part=main": {
+      "model": "mdm:block/split/foyer_wall_unit_bottom/main",
+      "y": 180
+    },
+    "facing=south,part=right": {
+      "model": "mdm:block/split/foyer_wall_unit_bottom/right",
+      "y": 180
+    },
+    "facing=west,part=whole": {
       "model": "mdm:block/foyer_wall_unit_bottom",
+      "y": 270
+    },
+    "facing=west,part=main": {
+      "model": "mdm:block/split/foyer_wall_unit_bottom/main",
+      "y": 270
+    },
+    "facing=west,part=right": {
+      "model": "mdm:block/split/foyer_wall_unit_bottom/right",
       "y": 270
     }
   }

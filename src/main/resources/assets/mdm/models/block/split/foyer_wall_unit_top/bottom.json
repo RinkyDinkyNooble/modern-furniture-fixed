@@ -1,0 +1,70 @@
+{
+  "textures": {
+    "all": "mdm:block/ikea_wood",
+    "particle": "mdm:block/ikea_wood",
+    "0": "mdm:block/ikea_wood",
+    "2": "mdm:block/foyer_mirror"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        11,
+        15
+      ],
+      "to": [
+        3,
+        16,
+        16
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          8,
+          1,
+          14
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            8.0,
+            3.0,
+            13.0
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            0.0,
+            8.0,
+            1.0,
+            13.0
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            1.0,
+            8.0,
+            4.0,
+            13.0
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            1.0,
+            0.0,
+            4.0,
+            1.0
+          ],
+          "texture": "#0"
+        }
+      }
+    }
+  ],
+  "render_type": "solid"
+}

@@ -1,18 +1,48 @@
 {
   "variants": {
-    "facing=north": {
+    "facing=north,part=whole": {
       "model": "mdm:block/bedroomset_1_black_loveseat"
     },
-    "facing=east": {
+    "facing=north,part=front": {
+      "model": "mdm:block/split/bedroomset_1_black_loveseat/front"
+    },
+    "facing=north,part=main": {
+      "model": "mdm:block/split/bedroomset_1_black_loveseat/main"
+    },
+    "facing=east,part=whole": {
       "model": "mdm:block/bedroomset_1_black_loveseat",
       "y": 90
     },
-    "facing=south": {
+    "facing=east,part=front": {
+      "model": "mdm:block/split/bedroomset_1_black_loveseat/front",
+      "y": 90
+    },
+    "facing=east,part=main": {
+      "model": "mdm:block/split/bedroomset_1_black_loveseat/main",
+      "y": 90
+    },
+    "facing=south,part=whole": {
       "model": "mdm:block/bedroomset_1_black_loveseat",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,part=front": {
+      "model": "mdm:block/split/bedroomset_1_black_loveseat/front",
+      "y": 180
+    },
+    "facing=south,part=main": {
+      "model": "mdm:block/split/bedroomset_1_black_loveseat/main",
+      "y": 180
+    },
+    "facing=west,part=whole": {
       "model": "mdm:block/bedroomset_1_black_loveseat",
+      "y": 270
+    },
+    "facing=west,part=front": {
+      "model": "mdm:block/split/bedroomset_1_black_loveseat/front",
+      "y": 270
+    },
+    "facing=west,part=main": {
+      "model": "mdm:block/split/bedroomset_1_black_loveseat/main",
       "y": 270
     }
   }

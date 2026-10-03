@@ -1,18 +1,63 @@
 {
   "variants": {
-    "facing=north": {
+    "facing=north,part=whole": {
       "model": "mdm:block/modern_painting_2"
     },
-    "facing=east": {
+    "facing=north,part=left": {
+      "model": "mdm:block/split/modern_painting_2/left"
+    },
+    "facing=north,part=main": {
+      "model": "mdm:block/split/modern_painting_2/main"
+    },
+    "facing=north,part=right": {
+      "model": "mdm:block/split/modern_painting_2/right"
+    },
+    "facing=east,part=whole": {
       "model": "mdm:block/modern_painting_2",
       "y": 90
     },
-    "facing=south": {
+    "facing=east,part=left": {
+      "model": "mdm:block/split/modern_painting_2/left",
+      "y": 90
+    },
+    "facing=east,part=main": {
+      "model": "mdm:block/split/modern_painting_2/main",
+      "y": 90
+    },
+    "facing=east,part=right": {
+      "model": "mdm:block/split/modern_painting_2/right",
+      "y": 90
+    },
+    "facing=south,part=whole": {
       "model": "mdm:block/modern_painting_2",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,part=left": {
+      "model": "mdm:block/split/modern_painting_2/left",
+      "y": 180
+    },
+    "facing=south,part=main": {
+      "model": "mdm:block/split/modern_painting_2/main",
+      "y": 180
+    },
+    "facing=south,part=right": {
+      "model": "mdm:block/split/modern_painting_2/right",
+      "y": 180
+    },
+    "facing=west,part=whole": {
       "model": "mdm:block/modern_painting_2",
+      "y": 270
+    },
+    "facing=west,part=left": {
+      "model": "mdm:block/split/modern_painting_2/left",
+      "y": 270
+    },
+    "facing=west,part=main": {
+      "model": "mdm:block/split/modern_painting_2/main",
+      "y": 270
+    },
+    "facing=west,part=right": {
+      "model": "mdm:block/split/modern_painting_2/right",
       "y": 270
     }
   }

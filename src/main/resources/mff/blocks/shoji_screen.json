@@ -1,0 +1,532 @@
+{
+  "variants": {
+    "facing=north,part=whole": {
+      "shape": [
+        [
+          2,
+          2,
+          12,
+          15,
+          32,
+          13
+        ],
+        [
+          -10,
+          2,
+          12,
+          2,
+          32,
+          13
+        ],
+        [
+          14,
+          2,
+          7,
+          26,
+          32,
+          8
+        ]
+      ]
+    },
+    "facing=north,part=left": {
+      "shape": [
+        [
+          0,
+          2,
+          7,
+          10,
+          16,
+          8
+        ]
+      ],
+      "offset": [
+        1,
+        0,
+        0
+      ]
+    },
+    "facing=north,part=main": {
+      "shape": [
+        [
+          2,
+          2,
+          12,
+          15,
+          16,
+          13
+        ]
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ]
+    },
+    "facing=north,part=right": {
+      "shape": [
+        [
+          6,
+          2,
+          12,
+          16,
+          16,
+          13
+        ]
+      ],
+      "offset": [
+        -1,
+        0,
+        0
+      ]
+    },
+    "facing=north,part=top_left": {
+      "shape": [
+        [
+          0,
+          0,
+          7,
+          10,
+          16,
+          8
+        ]
+      ],
+      "offset": [
+        1,
+        1,
+        0
+      ]
+    },
+    "facing=north,part=top": {
+      "shape": [
+        [
+          2,
+          0,
+          12,
+          15,
+          16,
+          13
+        ]
+      ],
+      "offset": [
+        0,
+        1,
+        0
+      ]
+    },
+    "facing=north,part=top_right": {
+      "shape": [
+        [
+          6,
+          0,
+          12,
+          16,
+          16,
+          13
+        ]
+      ],
+      "offset": [
+        -1,
+        1,
+        0
+      ]
+    },
+    "facing=east,part=whole": {
+      "shape": [
+        [
+          3,
+          2,
+          2,
+          4,
+          32,
+          15
+        ],
+        [
+          3,
+          2,
+          -10,
+          4,
+          32,
+          2
+        ],
+        [
+          8,
+          2,
+          14,
+          9,
+          32,
+          26
+        ]
+      ]
+    },
+    "facing=east,part=left": {
+      "shape": [
+        [
+          8,
+          2,
+          0,
+          9,
+          16,
+          10
+        ]
+      ],
+      "offset": [
+        0,
+        0,
+        1
+      ]
+    },
+    "facing=east,part=main": {
+      "shape": [
+        [
+          3,
+          2,
+          2,
+          4,
+          16,
+          15
+        ]
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ]
+    },
+    "facing=east,part=right": {
+      "shape": [
+        [
+          3,
+          2,
+          6,
+          4,
+          16,
+          16
+        ]
+      ],
+      "offset": [
+        0,
+        0,
+        -1
+      ]
+    },
+    "facing=east,part=top_left": {
+      "shape": [
+        [
+          8,
+          0,
+          0,
+          9,
+          16,
+          10
+        ]
+      ],
+      "offset": [
+        0,
+        1,
+        1
+      ]
+    },
+    "facing=east,part=top": {
+      "shape": [
+        [
+          3,
+          0,
+          2,
+          4,
+          16,
+          15
+        ]
+      ],
+      "offset": [
+        0,
+        1,
+        0
+      ]
+    },
+    "facing=east,part=top_right": {
+      "shape": [
+        [
+          3,
+          0,
+          6,
+          4,
+          16,
+          16
+        ]
+      ],
+      "offset": [
+        0,
+        1,
+        -1
+      ]
+    },
+    "facing=south,part=whole": {
+      "shape": [
+        [
+          1,
+          2,
+          3,
+          14,
+          32,
+          4
+        ],
+        [
+          14,
+          2,
+          3,
+          26,
+          32,
+          4
+        ],
+        [
+          -10,
+          2,
+          8,
+          2,
+          32,
+          9
+        ]
+      ]
+    },
+    "facing=south,part=left": {
+      "shape": [
+        [
+          6,
+          2,
+          8,
+          16,
+          16,
+          9
+        ]
+      ],
+      "offset": [
+        -1,
+        0,
+        0
+      ]
+    },
+    "facing=south,part=main": {
+      "shape": [
+        [
+          1,
+          2,
+          3,
+          14,
+          16,
+          4
+        ]
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ]
+    },
+    "facing=south,part=right": {
+      "shape": [
+        [
+          0,
+          2,
+          3,
+          10,
+          16,
+          4
+        ]
+      ],
+      "offset": [
+        1,
+        0,
+        0
+      ]
+    },
+    "facing=south,part=top_left": {
+      "shape": [
+        [
+          6,
+          0,
+          8,
+          16,
+          16,
+          9
+        ]
+      ],
+      "offset": [
+        -1,
+        1,
+        0
+      ]
+    },
+    "facing=south,part=top": {
+      "shape": [
+        [
+          1,
+          0,
+          3,
+          14,
+          16,
+          4
+        ]
+      ],
+      "offset": [
+        0,
+        1,
+        0
+      ]
+    },
+    "facing=south,part=top_right": {
+      "shape": [
+        [
+          0,
+          0,
+          3,
+          10,
+          16,
+          4
+        ]
+      ],
+      "offset": [
+        1,
+        1,
+        0
+      ]
+    },
+    "facing=west,part=whole": {
+      "shape": [
+        [
+          12,
+          2,
+          1,
+          13,
+          32,
+          14
+        ],
+        [
+          12,
+          2,
+          14,
+          13,
+          32,
+          26
+        ],
+        [
+          7,
+          2,
+          -10,
+          8,
+          32,
+          2
+        ]
+      ]
+    },
+    "facing=west,part=left": {
+      "shape": [
+        [
+          7,
+          2,
+          6,
+          8,
+          16,
+          16
+        ]
+      ],
+      "offset": [
+        0,
+        0,
+        -1
+      ]
+    },
+    "facing=west,part=main": {
+      "shape": [
+        [
+          12,
+          2,
+          1,
+          13,
+          16,
+          14
+        ]
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ]
+    },
+    "facing=west,part=right": {
+      "shape": [
+        [
+          12,
+          2,
+          0,
+          13,
+          16,
+          10
+        ]
+      ],
+      "offset": [
+        0,
+        0,
+        1
+      ]
+    },
+    "facing=west,part=top_left": {
+      "shape": [
+        [
+          7,
+          0,
+          6,
+          8,
+          16,
+          16
+        ]
+      ],
+      "offset": [
+        0,
+        1,
+        -1
+      ]
+    },
+    "facing=west,part=top": {
+      "shape": [
+        [
+          12,
+          0,
+          1,
+          13,
+          16,
+          14
+        ]
+      ],
+      "offset": [
+        0,
+        1,
+        0
+      ]
+    },
+    "facing=west,part=top_right": {
+      "shape": [
+        [
+          12,
+          0,
+          0,
+          13,
+          16,
+          10
+        ]
+      ],
+      "offset": [
+        0,
+        1,
+        1
+      ]
+    }
+  },
+  "parts": [
+    "left",
+    "main",
+    "right",
+    "top_left",
+    "top",
+    "top_right"
+  ]
+}

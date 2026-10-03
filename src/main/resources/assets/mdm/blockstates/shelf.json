@@ -1,18 +1,48 @@
 {
   "variants": {
-    "facing=north": {
+    "facing=north,part=whole": {
       "model": "mdm:block/shelf"
     },
-    "facing=east": {
+    "facing=north,part=main": {
+      "model": "mdm:block/split/shelf/main"
+    },
+    "facing=north,part=right": {
+      "model": "mdm:block/split/shelf/right"
+    },
+    "facing=east,part=whole": {
       "model": "mdm:block/shelf",
       "y": 90
     },
-    "facing=south": {
+    "facing=east,part=main": {
+      "model": "mdm:block/split/shelf/main",
+      "y": 90
+    },
+    "facing=east,part=right": {
+      "model": "mdm:block/split/shelf/right",
+      "y": 90
+    },
+    "facing=south,part=whole": {
       "model": "mdm:block/shelf",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,part=main": {
+      "model": "mdm:block/split/shelf/main",
+      "y": 180
+    },
+    "facing=south,part=right": {
+      "model": "mdm:block/split/shelf/right",
+      "y": 180
+    },
+    "facing=west,part=whole": {
       "model": "mdm:block/shelf",
+      "y": 270
+    },
+    "facing=west,part=main": {
+      "model": "mdm:block/split/shelf/main",
+      "y": 270
+    },
+    "facing=west,part=right": {
+      "model": "mdm:block/split/shelf/right",
       "y": 270
     }
   }

@@ -1,18 +1,48 @@
 {
   "variants": {
-    "facing=north": {
+    "facing=north,part=whole": {
       "model": "mdm:block/kitchen_set_3_corner_counter_with_sink"
     },
-    "facing=east": {
+    "facing=north,part=main": {
+      "model": "mdm:block/split/kitchen_set_3_corner_counter_with_sink/main"
+    },
+    "facing=north,part=top": {
+      "model": "mdm:block/split/kitchen_set_3_corner_counter_with_sink/top"
+    },
+    "facing=east,part=whole": {
       "model": "mdm:block/kitchen_set_3_corner_counter_with_sink",
       "y": 90
     },
-    "facing=south": {
+    "facing=east,part=main": {
+      "model": "mdm:block/split/kitchen_set_3_corner_counter_with_sink/main",
+      "y": 90
+    },
+    "facing=east,part=top": {
+      "model": "mdm:block/split/kitchen_set_3_corner_counter_with_sink/top",
+      "y": 90
+    },
+    "facing=south,part=whole": {
       "model": "mdm:block/kitchen_set_3_corner_counter_with_sink",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,part=main": {
+      "model": "mdm:block/split/kitchen_set_3_corner_counter_with_sink/main",
+      "y": 180
+    },
+    "facing=south,part=top": {
+      "model": "mdm:block/split/kitchen_set_3_corner_counter_with_sink/top",
+      "y": 180
+    },
+    "facing=west,part=whole": {
       "model": "mdm:block/kitchen_set_3_corner_counter_with_sink",
+      "y": 270
+    },
+    "facing=west,part=main": {
+      "model": "mdm:block/split/kitchen_set_3_corner_counter_with_sink/main",
+      "y": 270
+    },
+    "facing=west,part=top": {
+      "model": "mdm:block/split/kitchen_set_3_corner_counter_with_sink/top",
       "y": 270
     }
   }

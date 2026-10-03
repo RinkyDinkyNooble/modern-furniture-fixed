@@ -1,18 +1,48 @@
 {
   "variants": {
-    "facing=north": {
+    "facing=north,part=whole": {
       "model": "mdm:block/bedroom_set_1whiteloveseat"
     },
-    "facing=east": {
+    "facing=north,part=front": {
+      "model": "mdm:block/split/bedroom_set_1whiteloveseat/front"
+    },
+    "facing=north,part=main": {
+      "model": "mdm:block/split/bedroom_set_1whiteloveseat/main"
+    },
+    "facing=east,part=whole": {
       "model": "mdm:block/bedroom_set_1whiteloveseat",
       "y": 90
     },
-    "facing=south": {
+    "facing=east,part=front": {
+      "model": "mdm:block/split/bedroom_set_1whiteloveseat/front",
+      "y": 90
+    },
+    "facing=east,part=main": {
+      "model": "mdm:block/split/bedroom_set_1whiteloveseat/main",
+      "y": 90
+    },
+    "facing=south,part=whole": {
       "model": "mdm:block/bedroom_set_1whiteloveseat",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,part=front": {
+      "model": "mdm:block/split/bedroom_set_1whiteloveseat/front",
+      "y": 180
+    },
+    "facing=south,part=main": {
+      "model": "mdm:block/split/bedroom_set_1whiteloveseat/main",
+      "y": 180
+    },
+    "facing=west,part=whole": {
       "model": "mdm:block/bedroom_set_1whiteloveseat",
+      "y": 270
+    },
+    "facing=west,part=front": {
+      "model": "mdm:block/split/bedroom_set_1whiteloveseat/front",
+      "y": 270
+    },
+    "facing=west,part=main": {
+      "model": "mdm:block/split/bedroom_set_1whiteloveseat/main",
       "y": 270
     }
   }

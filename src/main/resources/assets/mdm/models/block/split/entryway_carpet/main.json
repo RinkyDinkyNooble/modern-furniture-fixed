@@ -1,0 +1,60 @@
+{
+  "textures": {
+    "all": "mdm:block/entryway_carpet",
+    "particle": "mdm:block/entryway_carpet",
+    "0": "mdm:block/entryway_carpet"
+  },
+  "elements": [
+    {
+      "from": [
+        -3,
+        0,
+        0
+      ],
+      "to": [
+        19,
+        0.25,
+        16
+      ],
+      "faces": {
+        "east": {
+          "uv": [
+            4.625,
+            6.0,
+            6.625,
+            6.125
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            7.875,
+            5.75,
+            9.875,
+            5.875
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            2.75,
+            9.875,
+            0.0,
+            7.875
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            2.75,
+            7.875,
+            0.0,
+            9.875
+          ],
+          "texture": "#0"
+        }
+      }
+    }
+  ],
+  "render_type": "translucent"
+}

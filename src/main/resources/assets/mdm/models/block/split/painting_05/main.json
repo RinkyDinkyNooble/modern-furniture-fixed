@@ -1,0 +1,73 @@
+{
+  "textures": {
+    "all": "mdm:block/painting05",
+    "particle": "mdm:block/painting05",
+    "0": "mdm:block/painting05"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        15
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "z",
+        "origin": [
+          8,
+          8,
+          15.5
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            2.6667,
+            10.6875,
+            13.3333
+          ],
+          "rotation": 270,
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            10.875,
+            2.6667,
+            16.0,
+            13.3333
+          ],
+          "rotation": 90,
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            14.0,
+            2.6667,
+            16.0,
+            13.3333
+          ],
+          "rotation": 90,
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            14.0,
+            2.6667,
+            16.0,
+            13.3333
+          ],
+          "rotation": 90,
+          "texture": "#0"
+        }
+      }
+    }
+  ],
+  "render_type": "solid"
+}

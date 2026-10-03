@@ -1,18 +1,48 @@
 {
   "variants": {
-    "facing=north": {
+    "facing=north,part=whole": {
       "model": "mdm:block/bathroom_radiator"
     },
-    "facing=east": {
+    "facing=north,part=main": {
+      "model": "mdm:block/split/bathroom_radiator/main"
+    },
+    "facing=north,part=top": {
+      "model": "mdm:block/split/bathroom_radiator/top"
+    },
+    "facing=east,part=whole": {
       "model": "mdm:block/bathroom_radiator",
       "y": 90
     },
-    "facing=south": {
+    "facing=east,part=main": {
+      "model": "mdm:block/split/bathroom_radiator/main",
+      "y": 90
+    },
+    "facing=east,part=top": {
+      "model": "mdm:block/split/bathroom_radiator/top",
+      "y": 90
+    },
+    "facing=south,part=whole": {
       "model": "mdm:block/bathroom_radiator",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,part=main": {
+      "model": "mdm:block/split/bathroom_radiator/main",
+      "y": 180
+    },
+    "facing=south,part=top": {
+      "model": "mdm:block/split/bathroom_radiator/top",
+      "y": 180
+    },
+    "facing=west,part=whole": {
       "model": "mdm:block/bathroom_radiator",
+      "y": 270
+    },
+    "facing=west,part=main": {
+      "model": "mdm:block/split/bathroom_radiator/main",
+      "y": 270
+    },
+    "facing=west,part=top": {
+      "model": "mdm:block/split/bathroom_radiator/top",
       "y": 270
     }
   }

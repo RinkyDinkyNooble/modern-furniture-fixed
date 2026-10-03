@@ -1,18 +1,48 @@
 {
   "variants": {
-    "facing=north": {
+    "facing=north,part=whole": {
       "model": "mdm:block/set_1_bed"
     },
-    "facing=east": {
+    "facing=north,part=main": {
+      "model": "mdm:block/split/set_1_bed/main"
+    },
+    "facing=north,part=back": {
+      "model": "mdm:block/split/set_1_bed/back"
+    },
+    "facing=east,part=whole": {
       "model": "mdm:block/set_1_bed",
       "y": 90
     },
-    "facing=south": {
+    "facing=east,part=main": {
+      "model": "mdm:block/split/set_1_bed/main",
+      "y": 90
+    },
+    "facing=east,part=back": {
+      "model": "mdm:block/split/set_1_bed/back",
+      "y": 90
+    },
+    "facing=south,part=whole": {
       "model": "mdm:block/set_1_bed",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,part=main": {
+      "model": "mdm:block/split/set_1_bed/main",
+      "y": 180
+    },
+    "facing=south,part=back": {
+      "model": "mdm:block/split/set_1_bed/back",
+      "y": 180
+    },
+    "facing=west,part=whole": {
       "model": "mdm:block/set_1_bed",
+      "y": 270
+    },
+    "facing=west,part=main": {
+      "model": "mdm:block/split/set_1_bed/main",
+      "y": 270
+    },
+    "facing=west,part=back": {
+      "model": "mdm:block/split/set_1_bed/back",
       "y": 270
     }
   }

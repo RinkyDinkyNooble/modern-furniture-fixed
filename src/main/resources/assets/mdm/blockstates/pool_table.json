@@ -1,18 +1,48 @@
 {
   "variants": {
-    "facing=north": {
+    "facing=north,part=whole": {
       "model": "mdm:block/pool_table"
     },
-    "facing=east": {
+    "facing=north,part=main": {
+      "model": "mdm:block/split/pool_table/main"
+    },
+    "facing=north,part=back": {
+      "model": "mdm:block/split/pool_table/back"
+    },
+    "facing=east,part=whole": {
       "model": "mdm:block/pool_table",
       "y": 90
     },
-    "facing=south": {
+    "facing=east,part=main": {
+      "model": "mdm:block/split/pool_table/main",
+      "y": 90
+    },
+    "facing=east,part=back": {
+      "model": "mdm:block/split/pool_table/back",
+      "y": 90
+    },
+    "facing=south,part=whole": {
       "model": "mdm:block/pool_table",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,part=main": {
+      "model": "mdm:block/split/pool_table/main",
+      "y": 180
+    },
+    "facing=south,part=back": {
+      "model": "mdm:block/split/pool_table/back",
+      "y": 180
+    },
+    "facing=west,part=whole": {
       "model": "mdm:block/pool_table",
+      "y": 270
+    },
+    "facing=west,part=main": {
+      "model": "mdm:block/split/pool_table/main",
+      "y": 270
+    },
+    "facing=west,part=back": {
+      "model": "mdm:block/split/pool_table/back",
       "y": 270
     }
   }

@@ -1,0 +1,78 @@
+{
+  "textures": {
+    "all": "mdm:block/painting_cloud",
+    "particle": "mdm:block/painting_cloud",
+    "0": "mdm:block/painting_cloud"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        15
+      ],
+      "to": [
+        8,
+        16,
+        16
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          -16,
+          7,
+          14
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            4.0,
+            16.0
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            1.0,
+            16.0
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            12.0,
+            0.0,
+            16.0,
+            1.0
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            12.0,
+            0.0,
+            16.0,
+            1.0
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            12.0,
+            0.0,
+            16.0,
+            1.0
+          ],
+          "texture": "#0"
+        }
+      }
+    }
+  ],
+  "render_type": "solid"
+}

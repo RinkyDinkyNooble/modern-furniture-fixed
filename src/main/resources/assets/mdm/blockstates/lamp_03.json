@@ -1,7 +1,13 @@
 {
   "variants": {
-    "": {
+    "part=whole": {
       "model": "mdm:block/lamp_03"
+    },
+    "part=main": {
+      "model": "mdm:block/split/lamp_03/main"
+    },
+    "part=top": {
+      "model": "mdm:block/split/lamp_03/top"
     }
   }
 }

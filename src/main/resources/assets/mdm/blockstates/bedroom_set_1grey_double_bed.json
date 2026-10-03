@@ -1,18 +1,78 @@
 {
   "variants": {
-    "facing=north": {
+    "facing=north,part=whole": {
       "model": "mdm:block/bedroom_set_1grey_double_bed"
     },
-    "facing=east": {
+    "facing=north,part=front": {
+      "model": "mdm:block/split/bedroom_set_1grey_double_bed/front"
+    },
+    "facing=north,part=front_right": {
+      "model": "mdm:block/split/bedroom_set_1grey_double_bed/front_right"
+    },
+    "facing=north,part=main": {
+      "model": "mdm:block/split/bedroom_set_1grey_double_bed/main"
+    },
+    "facing=north,part=right": {
+      "model": "mdm:block/split/bedroom_set_1grey_double_bed/right"
+    },
+    "facing=east,part=whole": {
       "model": "mdm:block/bedroom_set_1grey_double_bed",
       "y": 90
     },
-    "facing=south": {
+    "facing=east,part=front": {
+      "model": "mdm:block/split/bedroom_set_1grey_double_bed/front",
+      "y": 90
+    },
+    "facing=east,part=front_right": {
+      "model": "mdm:block/split/bedroom_set_1grey_double_bed/front_right",
+      "y": 90
+    },
+    "facing=east,part=main": {
+      "model": "mdm:block/split/bedroom_set_1grey_double_bed/main",
+      "y": 90
+    },
+    "facing=east,part=right": {
+      "model": "mdm:block/split/bedroom_set_1grey_double_bed/right",
+      "y": 90
+    },
+    "facing=south,part=whole": {
       "model": "mdm:block/bedroom_set_1grey_double_bed",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,part=front": {
+      "model": "mdm:block/split/bedroom_set_1grey_double_bed/front",
+      "y": 180
+    },
+    "facing=south,part=front_right": {
+      "model": "mdm:block/split/bedroom_set_1grey_double_bed/front_right",
+      "y": 180
+    },
+    "facing=south,part=main": {
+      "model": "mdm:block/split/bedroom_set_1grey_double_bed/main",
+      "y": 180
+    },
+    "facing=south,part=right": {
+      "model": "mdm:block/split/bedroom_set_1grey_double_bed/right",
+      "y": 180
+    },
+    "facing=west,part=whole": {
       "model": "mdm:block/bedroom_set_1grey_double_bed",
+      "y": 270
+    },
+    "facing=west,part=front": {
+      "model": "mdm:block/split/bedroom_set_1grey_double_bed/front",
+      "y": 270
+    },
+    "facing=west,part=front_right": {
+      "model": "mdm:block/split/bedroom_set_1grey_double_bed/front_right",
+      "y": 270
+    },
+    "facing=west,part=main": {
+      "model": "mdm:block/split/bedroom_set_1grey_double_bed/main",
+      "y": 270
+    },
+    "facing=west,part=right": {
+      "model": "mdm:block/split/bedroom_set_1grey_double_bed/right",
       "y": 270
     }
   }

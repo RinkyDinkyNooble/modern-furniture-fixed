@@ -1,0 +1,70 @@
+{
+  "textures": {
+    "all": "mdm:block/modern_painting",
+    "particle": "mdm:block/modern_painting",
+    "0": "mdm:block/modern_painting_base",
+    "1": "mdm:block/modern_painting"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        4,
+        15.5
+      ],
+      "to": [
+        8,
+        16,
+        16
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          -9,
+          15,
+          14
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            8.0,
+            4.0,
+            16.0
+          ],
+          "texture": "#1"
+        },
+        "east": {
+          "uv": [
+            1.25,
+            0.5,
+            1.75,
+            0.75
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            2.625,
+            0.5,
+            2.75,
+            0.75
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            5.625,
+            0.25,
+            5.75,
+            0.75
+          ],
+          "texture": "#0"
+        }
+      }
+    }
+  ],
+  "render_type": "solid"
+}

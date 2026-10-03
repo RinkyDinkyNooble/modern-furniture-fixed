@@ -1,18 +1,48 @@
 {
   "variants": {
-    "facing=north": {
+    "facing=north,part=whole": {
       "model": "mdm:block/white_wood_foyer_wall_unit"
     },
-    "facing=east": {
+    "facing=north,part=main": {
+      "model": "mdm:block/split/white_wood_foyer_wall_unit/main"
+    },
+    "facing=north,part=right": {
+      "model": "mdm:block/split/white_wood_foyer_wall_unit/right"
+    },
+    "facing=east,part=whole": {
       "model": "mdm:block/white_wood_foyer_wall_unit",
       "y": 90
     },
-    "facing=south": {
+    "facing=east,part=main": {
+      "model": "mdm:block/split/white_wood_foyer_wall_unit/main",
+      "y": 90
+    },
+    "facing=east,part=right": {
+      "model": "mdm:block/split/white_wood_foyer_wall_unit/right",
+      "y": 90
+    },
+    "facing=south,part=whole": {
       "model": "mdm:block/white_wood_foyer_wall_unit",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,part=main": {
+      "model": "mdm:block/split/white_wood_foyer_wall_unit/main",
+      "y": 180
+    },
+    "facing=south,part=right": {
+      "model": "mdm:block/split/white_wood_foyer_wall_unit/right",
+      "y": 180
+    },
+    "facing=west,part=whole": {
       "model": "mdm:block/white_wood_foyer_wall_unit",
+      "y": 270
+    },
+    "facing=west,part=main": {
+      "model": "mdm:block/split/white_wood_foyer_wall_unit/main",
+      "y": 270
+    },
+    "facing=west,part=right": {
+      "model": "mdm:block/split/white_wood_foyer_wall_unit/right",
       "y": 270
     }
   }

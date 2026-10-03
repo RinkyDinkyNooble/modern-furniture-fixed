@@ -1,0 +1,468 @@
+{
+  "variants": {
+    "facing=north,part=whole": {
+      "shape": [
+        [
+          -8,
+          -12,
+          15,
+          24,
+          12,
+          16
+        ]
+      ]
+    },
+    "facing=north,part=bottom_left": {
+      "shape": [
+        [
+          0,
+          4,
+          15,
+          8,
+          16,
+          16
+        ]
+      ],
+      "offset": [
+        1,
+        -1,
+        0
+      ]
+    },
+    "facing=north,part=bottom": {
+      "shape": [
+        [
+          0,
+          4,
+          15,
+          16,
+          16,
+          16
+        ]
+      ],
+      "offset": [
+        0,
+        -1,
+        0
+      ]
+    },
+    "facing=north,part=bottom_right": {
+      "shape": [
+        [
+          8,
+          4,
+          15,
+          16,
+          16,
+          16
+        ]
+      ],
+      "offset": [
+        -1,
+        -1,
+        0
+      ]
+    },
+    "facing=north,part=left": {
+      "shape": [
+        [
+          0,
+          0,
+          15,
+          8,
+          12,
+          16
+        ]
+      ],
+      "offset": [
+        1,
+        0,
+        0
+      ]
+    },
+    "facing=north,part=main": {
+      "shape": [
+        [
+          0,
+          0,
+          15,
+          16,
+          12,
+          16
+        ]
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ]
+    },
+    "facing=north,part=right": {
+      "shape": [
+        [
+          8,
+          0,
+          15,
+          16,
+          12,
+          16
+        ]
+      ],
+      "offset": [
+        -1,
+        0,
+        0
+      ]
+    },
+    "facing=east,part=whole": {
+      "shape": [
+        [
+          0,
+          -12,
+          -8,
+          1,
+          12,
+          24
+        ]
+      ]
+    },
+    "facing=east,part=bottom_left": {
+      "shape": [
+        [
+          0,
+          4,
+          0,
+          1,
+          16,
+          8
+        ]
+      ],
+      "offset": [
+        0,
+        -1,
+        1
+      ]
+    },
+    "facing=east,part=bottom": {
+      "shape": [
+        [
+          0,
+          4,
+          0,
+          1,
+          16,
+          16
+        ]
+      ],
+      "offset": [
+        0,
+        -1,
+        0
+      ]
+    },
+    "facing=east,part=bottom_right": {
+      "shape": [
+        [
+          0,
+          4,
+          8,
+          1,
+          16,
+          16
+        ]
+      ],
+      "offset": [
+        0,
+        -1,
+        -1
+      ]
+    },
+    "facing=east,part=left": {
+      "shape": [
+        [
+          0,
+          0,
+          0,
+          1,
+          12,
+          8
+        ]
+      ],
+      "offset": [
+        0,
+        0,
+        1
+      ]
+    },
+    "facing=east,part=main": {
+      "shape": [
+        [
+          0,
+          0,
+          0,
+          1,
+          12,
+          16
+        ]
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ]
+    },
+    "facing=east,part=right": {
+      "shape": [
+        [
+          0,
+          0,
+          8,
+          1,
+          12,
+          16
+        ]
+      ],
+      "offset": [
+        0,
+        0,
+        -1
+      ]
+    },
+    "facing=south,part=whole": {
+      "shape": [
+        [
+          -8,
+          -12,
+          0,
+          24,
+          12,
+          1
+        ]
+      ]
+    },
+    "facing=south,part=bottom_left": {
+      "shape": [
+        [
+          8,
+          4,
+          0,
+          16,
+          16,
+          1
+        ]
+      ],
+      "offset": [
+        -1,
+        -1,
+        0
+      ]
+    },
+    "facing=south,part=bottom": {
+      "shape": [
+        [
+          0,
+          4,
+          0,
+          16,
+          16,
+          1
+        ]
+      ],
+      "offset": [
+        0,
+        -1,
+        0
+      ]
+    },
+    "facing=south,part=bottom_right": {
+      "shape": [
+        [
+          0,
+          4,
+          0,
+          8,
+          16,
+          1
+        ]
+      ],
+      "offset": [
+        1,
+        -1,
+        0
+      ]
+    },
+    "facing=south,part=left": {
+      "shape": [
+        [
+          8,
+          0,
+          0,
+          16,
+          12,
+          1
+        ]
+      ],
+      "offset": [
+        -1,
+        0,
+        0
+      ]
+    },
+    "facing=south,part=main": {
+      "shape": [
+        [
+          0,
+          0,
+          0,
+          16,
+          12,
+          1
+        ]
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ]
+    },
+    "facing=south,part=right": {
+      "shape": [
+        [
+          0,
+          0,
+          0,
+          8,
+          12,
+          1
+        ]
+      ],
+      "offset": [
+        1,
+        0,
+        0
+      ]
+    },
+    "facing=west,part=whole": {
+      "shape": [
+        [
+          15,
+          -12,
+          -8,
+          16,
+          12,
+          24
+        ]
+      ]
+    },
+    "facing=west,part=bottom_left": {
+      "shape": [
+        [
+          15,
+          4,
+          8,
+          16,
+          16,
+          16
+        ]
+      ],
+      "offset": [
+        0,
+        -1,
+        -1
+      ]
+    },
+    "facing=west,part=bottom": {
+      "shape": [
+        [
+          15,
+          4,
+          0,
+          16,
+          16,
+          16
+        ]
+      ],
+      "offset": [
+        0,
+        -1,
+        0
+      ]
+    },
+    "facing=west,part=bottom_right": {
+      "shape": [
+        [
+          15,
+          4,
+          0,
+          16,
+          16,
+          8
+        ]
+      ],
+      "offset": [
+        0,
+        -1,
+        1
+      ]
+    },
+    "facing=west,part=left": {
+      "shape": [
+        [
+          15,
+          0,
+          8,
+          16,
+          12,
+          16
+        ]
+      ],
+      "offset": [
+        0,
+        0,
+        -1
+      ]
+    },
+    "facing=west,part=main": {
+      "shape": [
+        [
+          15,
+          0,
+          0,
+          16,
+          12,
+          16
+        ]
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ]
+    },
+    "facing=west,part=right": {
+      "shape": [
+        [
+          15,
+          0,
+          0,
+          16,
+          12,
+          8
+        ]
+      ],
+      "offset": [
+        0,
+        0,
+        1
+      ]
+    }
+  },
+  "parts": [
+    "bottom_left",
+    "bottom",
+    "bottom_right",
+    "left",
+    "main",
+    "right"
+  ]
+}

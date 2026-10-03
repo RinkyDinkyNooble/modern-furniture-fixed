@@ -1,0 +1,69 @@
+{
+  "textures": {
+    "all": "mdm:block/tall_mirror",
+    "particle": "mdm:block/tall_mirror",
+    "0": "mdm:block/tall_mirror"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        15
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          7,
+          0,
+          14
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            4.0,
+            4.0,
+            8.0
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            8.0,
+            4.0,
+            8.25,
+            8.0
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            4.0,
+            4.0,
+            8.0,
+            8.0
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            8.25,
+            4.0,
+            8.5,
+            8.0
+          ],
+          "texture": "#0"
+        }
+      }
+    }
+  ],
+  "render_type": "solid"
+}

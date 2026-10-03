@@ -1,18 +1,78 @@
 {
   "variants": {
-    "facing=north": {
+    "facing=north,part=whole": {
       "model": "mdm:block/bedroom_set_1wengebunkbed"
     },
-    "facing=east": {
+    "facing=north,part=main": {
+      "model": "mdm:block/split/bedroom_set_1wengebunkbed/main"
+    },
+    "facing=north,part=right": {
+      "model": "mdm:block/split/bedroom_set_1wengebunkbed/right"
+    },
+    "facing=north,part=top": {
+      "model": "mdm:block/split/bedroom_set_1wengebunkbed/top"
+    },
+    "facing=north,part=top_right": {
+      "model": "mdm:block/split/bedroom_set_1wengebunkbed/top_right"
+    },
+    "facing=east,part=whole": {
       "model": "mdm:block/bedroom_set_1wengebunkbed",
       "y": 90
     },
-    "facing=south": {
+    "facing=east,part=main": {
+      "model": "mdm:block/split/bedroom_set_1wengebunkbed/main",
+      "y": 90
+    },
+    "facing=east,part=right": {
+      "model": "mdm:block/split/bedroom_set_1wengebunkbed/right",
+      "y": 90
+    },
+    "facing=east,part=top": {
+      "model": "mdm:block/split/bedroom_set_1wengebunkbed/top",
+      "y": 90
+    },
+    "facing=east,part=top_right": {
+      "model": "mdm:block/split/bedroom_set_1wengebunkbed/top_right",
+      "y": 90
+    },
+    "facing=south,part=whole": {
       "model": "mdm:block/bedroom_set_1wengebunkbed",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,part=main": {
+      "model": "mdm:block/split/bedroom_set_1wengebunkbed/main",
+      "y": 180
+    },
+    "facing=south,part=right": {
+      "model": "mdm:block/split/bedroom_set_1wengebunkbed/right",
+      "y": 180
+    },
+    "facing=south,part=top": {
+      "model": "mdm:block/split/bedroom_set_1wengebunkbed/top",
+      "y": 180
+    },
+    "facing=south,part=top_right": {
+      "model": "mdm:block/split/bedroom_set_1wengebunkbed/top_right",
+      "y": 180
+    },
+    "facing=west,part=whole": {
       "model": "mdm:block/bedroom_set_1wengebunkbed",
+      "y": 270
+    },
+    "facing=west,part=main": {
+      "model": "mdm:block/split/bedroom_set_1wengebunkbed/main",
+      "y": 270
+    },
+    "facing=west,part=right": {
+      "model": "mdm:block/split/bedroom_set_1wengebunkbed/right",
+      "y": 270
+    },
+    "facing=west,part=top": {
+      "model": "mdm:block/split/bedroom_set_1wengebunkbed/top",
+      "y": 270
+    },
+    "facing=west,part=top_right": {
+      "model": "mdm:block/split/bedroom_set_1wengebunkbed/top_right",
       "y": 270
     }
   }
